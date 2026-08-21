@@ -10,3 +10,4 @@
  - Facundo D'Addese ([facudaddese](https://github.com/facudaddese))
 
 ## Casos de uso realizados
+- `TestAgregarStaff` ``TestListarStaff`` (Facundo D'Addese)
