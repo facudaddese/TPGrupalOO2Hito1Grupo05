@@ -20,6 +20,7 @@ public class Staff {
         this.dni = dni;
         this.fechaNacimiento = fechaNacimiento;
         this.fechaIngreso = fechaIngreso;
+        this.sueldo = sueldo;
     }
 
     //Getters
@@ -80,4 +81,16 @@ public class Staff {
         this.sueldo = sueldo;
     }
 
+    @Override
+    public String toString() {
+        return "Staff{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                ", dni=" + dni +
+                ", fechaNacimiento=" + fechaNacimiento +
+                ", fechaIngreso=" + fechaIngreso +
+                ", sueldo=" + sueldo +
+                '}';
+    }
 }
