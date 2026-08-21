@@ -3,21 +3,28 @@ package datos;
 import java.time.LocalDate;
 
 public class Cajero extends Staff {
-    private String especialidad;
+    private String turno;
 
     public Cajero() {
     }
 
-    public Cajero(String nombre, String apellido, int dni, LocalDate fechaNacimiento, LocalDate fechaIngreso, int sueldo, String especialidad) {
+    public Cajero(String nombre, String apellido, int dni, LocalDate fechaNacimiento, LocalDate fechaIngreso, int sueldo, String turno) {
         super(nombre, apellido, dni, fechaNacimiento, fechaIngreso, sueldo);
-        this.especialidad = especialidad;
+        this.turno = turno;
     }
 
-    public String getEspecialidad() {
-        return especialidad;
+    public String getTurno() {
+        return turno;
     }
 
-    public void setEspecialidad(String especialidad) {
-        this.especialidad = especialidad;
+    public void setTurno(String turno) {
+        this.turno = turno;
+    }
+
+    @Override
+    public String toString() {
+        return "Cajero{" +
+                "turno='" + turno + '\'' +
+                '}';
     }
 }
