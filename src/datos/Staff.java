@@ -23,58 +23,56 @@ public class Staff {
         this.sueldo = sueldo;
     }
 
-    //Getters
     public int getId() {
         return id;
+    }
+
+    protected void setId(int id) {
+        this.id = id;
     }
 
     public String getNombre() {
         return nombre;
     }
 
-    public String getApellido() {
-        return apellido;
-    }
-
-    public int getDni() {
-        return dni;
-    }
-
-    public LocalDate getFechaNacimiento() {
-        return fechaNacimiento;
-    }
-
-    public LocalDate getFechaIngreso() {
-        return fechaIngreso;
-    }
-
-    public int getSueldo() {
-        return sueldo;
-    }
-
-    //Setters
-    protected void setId(int id) {
-        this.id = id;
-    }
-
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
     }
 
     public void setApellido(String apellido) {
         this.apellido = apellido;
     }
 
-    protected void setDni(int dni) {
+    public int getDni() {
+        return dni;
+    }
+
+    public void setDni(int dni) {
         this.dni = dni;
+    }
+
+    public LocalDate getFechaNacimiento() {
+        return fechaNacimiento;
     }
 
     public void setFechaNacimiento(LocalDate fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
+    public LocalDate getFechaIngreso() {
+        return fechaIngreso;
+    }
+
     public void setFechaIngreso(LocalDate fechaIngreso) {
         this.fechaIngreso = fechaIngreso;
+    }
+
+    public int getSueldo() {
+        return sueldo;
     }
 
     public void setSueldo(int sueldo) {
