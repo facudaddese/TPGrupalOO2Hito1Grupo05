@@ -2,6 +2,7 @@ package dao;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -38,26 +39,26 @@ public class StaffDao {
         return id;
     }
 
-    public void actualizar(Staff objeto){
+    public void actualizar(Staff objeto) {
         try {
             iniciaOperacion();
             session.update(objeto);
             tx.commit();
-        }catch (HibernateException he){
+        } catch (HibernateException he) {
             manejaExcepcion(he);
-        }finally {
+        } finally {
             session.close();
         }
     }
 
-    public void eliminar(Staff objeto){
+    public void eliminar(Staff objeto) {
         try {
             iniciaOperacion();
             session.delete(objeto);
             tx.commit();
-        }catch (HibernateException he){
+        } catch (HibernateException he) {
             manejaExcepcion(he);
-        }finally {
+        } finally {
             session.close();
         }
     }
