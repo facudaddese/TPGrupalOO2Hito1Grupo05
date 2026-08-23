@@ -1,14 +1,13 @@
 package test;
 
 import datos.Staff;
-import dao.StaffDao;
-
+import negocio.StaffABM;
 import java.util.List;
 
 public class TestListarStaff {
     public static void main(String[] args) {
-        StaffDao dao = new StaffDao();
-        List<Staff> lista = dao.traer();
+        StaffABM abm = new StaffABM();
+        List<Staff> lista = abm.traer();
         lista.forEach(System.out::println);
     }
 }

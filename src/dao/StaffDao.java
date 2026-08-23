@@ -73,6 +73,20 @@ public class StaffDao {
         return objeto;
     }
 
+    public Staff traerPorDni(int dni) {
+        Staff objeto = null;
+        try {
+            iniciaOperacion();
+            Query<Staff> query = session.createQuery(
+                    "from Staff s where s.dni = :dni", Staff.class);
+            query.setParameter("dni", dni);
+            objeto = query.uniqueResultOptional().orElse(null);
+        } finally {
+            session.close();
+        }
+        return objeto;
+    }
+
     public List<Staff> traer() {
         List<Staff> lista = new ArrayList<>();
         try {
