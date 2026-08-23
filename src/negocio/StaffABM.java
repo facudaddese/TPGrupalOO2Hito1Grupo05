@@ -35,7 +35,7 @@ public class StaffABM {
 
     public void eliminar(long id) throws Exception {
         Staff s = dao.traer(id);
-        if(s == null)
+        if (s == null)
             throw new Exception("ERROR: no existe personal con dicho DNI");
         dao.eliminar(s);
     }
