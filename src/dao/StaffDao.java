@@ -38,6 +38,30 @@ public class StaffDao {
         return id;
     }
 
+    public void actualizar(Staff objeto){
+        try {
+            iniciaOperacion();
+            session.update(objeto);
+            tx.commit();
+        }catch (HibernateException he){
+            manejaExcepcion(he);
+        }finally {
+            session.close();
+        }
+    }
+
+    public void eliminar(Staff objeto){
+        try {
+            iniciaOperacion();
+            session.delete(objeto);
+            tx.commit();
+        }catch (HibernateException he){
+            manejaExcepcion(he);
+        }finally {
+            session.close();
+        }
+    }
+
     public Staff traer(long id) {
         Staff objeto = null;
         try {
