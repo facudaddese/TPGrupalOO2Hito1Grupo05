@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "https://hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="datos.UnidadDeVenta" table="unidadDeVenta">
+        <id name="id" column="id">
+            <generator class="identity"/>
+        </id>
+        <property name="nombreComercial" column="nombreComercial" type="string" not-null="true"/>
+        <many-to-one name="responsable"
+                     class="datos.Staff"
+                     column="idStaffResponsable"
+                     not-null="true" />
+        <property name="superficie" column="superficie" type="integer" not-null="true" unique="true"/>
+        <property name="codigo" column="codigo" type="string" not-null="true"/>
+        <set name="listaStaff" lazy="true">
+            <key column="idUnidadVenta"/>
+            <one-to-many class="datos.Staff"/>
+        </set>
+        <property name="activo" column="activo" type="boolean" not-null="true"/>
+
+        <joined-subclass name="datos.PuestoDesarmable" table="puestoDesarmable">
+            <key column="idPuestoDesarmable"/>
+            <property name="cantidadCarpas" column="cantidad_carpas" type="integer"/>
+            <property name="tiempoMontaje" column="tiempo_montaje" type="float"/>
+        </joined-subclass>
+
+        <joined-subclass name="datos.FoodTruck" table="foodtruck">
+            <key column="idFoodTruck"/>
+            <property name="patente" column="patente" type="string"/>
+            <property name="conexion" column="estado_conexion" type="boolean"/>
+        </joined-subclass>
+
+    </class>
+</hibernate-mapping>
