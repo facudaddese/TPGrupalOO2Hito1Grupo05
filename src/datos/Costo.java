@@ -7,6 +7,8 @@ public class Costo {
     private int costoMontaje;
     private int plusElectricidad;
     private int sueldoBase;
+    
+    private Festival festival;
 
     public Costo() {} // siempre hay que implementar el constructor vacío 
     
@@ -17,6 +19,15 @@ public class Costo {
         this.costoMontaje = costoMontaje;
         this.plusElectricidad = plusElectricidad;
         this.sueldoBase = sueldoBase;
+    }
+    
+    public Costo(int costoSuperficies, int costoMontaje, int plusElectricidad, int sueldoBase, Festival festival) {  
+        super();
+    	this.costoSuperficies = costoSuperficies;
+        this.costoMontaje = costoMontaje;
+        this.plusElectricidad = plusElectricidad;
+        this.sueldoBase = sueldoBase;
+        this.festival = festival;
     }
     
   //geters y seters 
@@ -59,6 +70,16 @@ public class Costo {
 
 	public void setSueldoBase(int sueldoBase) {
 		this.sueldoBase = sueldoBase;
+	}
+	
+	
+
+	public Festival getFestival() {
+		return festival;
+	}
+
+	public void setFestival(Festival festival) {
+		this.festival = festival;
 	}
 
 	@Override

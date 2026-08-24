@@ -28,7 +28,7 @@ public class StaffABM {
         return dao.agregar(s);
     }
 
-    public void modificar(Costo s) throws Exception {
+    public void modificar(Staff s) throws Exception {
         Staff existe = dao.traerPorDni(s.getDni());
         if (existe != null && existe.getId() != s.getId()) {
 			throw new Exception("ERROR: ya existe un integrante del Staff con el mismo DNI " + s.getDni());

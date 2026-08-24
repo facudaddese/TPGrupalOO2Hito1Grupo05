@@ -4,6 +4,7 @@ import java.util.List;
 
 import dao.CostoDao;
 import datos.Costo;
+import datos.Festival;
 import datos.Staff;
 
 public class CostoABM {
@@ -15,6 +16,11 @@ public class CostoABM {
 	
 	public List<Costo> traer(){
 		return dao.traer();
+	}
+	
+	public int agregar(int costoSuperficies,int costoMontaje,int plusElectricidad,int sueldoBase, Festival festival) {
+		Costo c = new Costo(costoSuperficies,costoMontaje,plusElectricidad,sueldoBase, festival);
+		return dao.agregar(c);
 	}
 	
 	public int agregar(Costo c) throws Exception {
