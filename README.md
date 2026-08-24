@@ -11,3 +11,4 @@
 
 ## Casos de uso realizados
 - Staff y su relación de herencia con Cocinero y Cajero (Facundo D'Addese)
+- Festival y Costo 1-1 (Daira Mazza)
