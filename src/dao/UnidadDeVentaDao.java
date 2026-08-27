@@ -82,7 +82,7 @@ public class UnidadDeVentaDao {
         return objeto;
     }
 
-    public UnidadDeVenta traerPorCodigo(String codigo){
+    /*public UnidadDeVenta traerPorCodigo(String codigo){
         UnidadDeVenta objeto = null;
         try {
             iniciaOperacion();
@@ -91,6 +91,6 @@ public class UnidadDeVentaDao {
         }finally {
             session.close();
         }
-    }
+    }*/
 
 }
