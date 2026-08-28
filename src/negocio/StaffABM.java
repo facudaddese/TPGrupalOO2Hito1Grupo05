@@ -17,6 +17,7 @@ public class StaffABM {
         return dao.traer(id);
     }
 
+    //Cocinero
     public int agregar(String nombre, String apellido, int dni, LocalDate fechaNacimiento, LocalDate fechaIngreso, int sueldo, String especialidadCulinaria, double plusPorCategoria) throws Exception {
 
         if (dao.traerPorDni(dni) != null)
@@ -26,7 +27,8 @@ public class StaffABM {
 
         return dao.agregar(c);
     }
-
+    
+    //Cajero
     public int agregar(String nombre, String apellido, int dni, LocalDate fechaNacimiento, LocalDate fechaIngreso, int sueldo, String turno) throws Exception {
 
         if (dao.traerPorDni(dni) != null)
@@ -39,16 +41,18 @@ public class StaffABM {
 
     public void modificar(Staff s) throws Exception {
         Staff existe = dao.traerPorDni(s.getDni());
-        if (existe != null && existe.getId() != s.getId())
-            throw new Exception("ERROR: ya existe un integrante del Staff con el mismo DNI " + s.getDni());
+        if (existe != null && existe.getId() != s.getId()) {
+			throw new Exception("ERROR: ya existe un integrante del Staff con el mismo DNI " + s.getDni());
+		}
 
         dao.actualizar(s);
     }
 
     public void eliminar(long id) throws Exception {
         Staff s = dao.traer(id);
-        if (s == null)
-            throw new Exception("ERROR: no existe personal con dicho DNI");
+        if (s == null) {
+			throw new Exception("ERROR: no existe personal con dicho DNI");
+		}
         dao.eliminar(s);
     }
 
