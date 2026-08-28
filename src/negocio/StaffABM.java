@@ -5,6 +5,8 @@ import java.time.Period;
 import java.util.List;
 
 import dao.StaffDao;
+import datos.Cajero;
+import datos.Cocinero;
 import datos.Staff;
 
 public class StaffABM {
@@ -15,17 +17,26 @@ public class StaffABM {
         return dao.traer(id);
     }
 
-    public int agregar(Staff s) throws Exception {
-        if (dao.traerPorDni(s.getDni()) != null) {
-			throw new Exception("ERROR: ya existe un integrante del Staff con el mismo DNI " + s.getDni());
-		}
+    //Cocinero
+    public int agregar(String nombre, String apellido, int dni, LocalDate fechaNacimiento, LocalDate fechaIngreso, int sueldo, String especialidadCulinaria, double plusPorCategoria) throws Exception {
 
-        int edad = Period.between(s.getFechaNacimiento(), LocalDate.now()).getYears();
-        if (edad < 18) {
-			throw new Exception("ERROR: el personal debe ser mayor de edad");
-		}
+        if (dao.traerPorDni(dni) != null)
+            throw new Exception("ERROR: ya existe un integrante del Staff con el mismo DNI " + dni);
 
-        return dao.agregar(s);
+        Cocinero c = new Cocinero(nombre, apellido, dni, fechaNacimiento, fechaIngreso, sueldo, especialidadCulinaria, plusPorCategoria);
+
+        return dao.agregar(c);
+    }
+    
+    //Cajero
+    public int agregar(String nombre, String apellido, int dni, LocalDate fechaNacimiento, LocalDate fechaIngreso, int sueldo, String turno) throws Exception {
+
+        if (dao.traerPorDni(dni) != null)
+            throw new Exception("ERROR: ya existe un integrante del Staff con el mismo DNI " + dni);
+
+        Cajero ca = new Cajero(nombre, apellido, dni, fechaNacimiento, fechaIngreso, sueldo, turno);
+
+        return dao.agregar(ca);
     }
 
     public void modificar(Staff s) throws Exception {
