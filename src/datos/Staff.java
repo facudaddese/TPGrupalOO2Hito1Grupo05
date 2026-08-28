@@ -1,6 +1,7 @@
 package datos;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 public class Staff {
     private int id;
@@ -60,6 +61,10 @@ public class Staff {
     }
 
     public void setFechaNacimiento(LocalDate fechaNacimiento) {
+        if (fechaNacimiento != null && Period.between(fechaNacimiento, LocalDate.now()).getYears() < 18) {
+            throw new IllegalArgumentException("ERROR: el personal debe ser mayor de edad");
+        }
+
         this.fechaNacimiento = fechaNacimiento;
     }
 
