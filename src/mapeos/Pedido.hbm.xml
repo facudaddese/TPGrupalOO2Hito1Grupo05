@@ -12,6 +12,8 @@
 
         <many-to-one name="unidadDeVenta" class="datos.UnidadDeVenta" column="idUnidadDeVenta" not-null="true"/>
 
+        <many-to-one name="festival" class="datos.Festival" column="idFestival" not-null="true"/>
+
         <set name="listaItems" table="Item_pedido" order-by="idItemPedido asc" inverse="true" lazy="true" fetch="select">
             <key column="idPedido" not-null="true"  />
             <one-to-many class="datos.ItemPedido" />

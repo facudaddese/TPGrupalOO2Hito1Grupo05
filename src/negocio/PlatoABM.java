@@ -7,7 +7,7 @@ public class PlatoABM {
 
     PlatoDao dao = new PlatoDao();
 
-    public Plato traer(long idPlato) {
+    public Plato traer(int idPlato) {
         return dao.traer(idPlato);
     }
 
