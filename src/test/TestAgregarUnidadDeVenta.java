@@ -17,8 +17,8 @@ public class TestAgregarUnidadDeVenta {
         Set<Staff> staffInicial = new HashSet<>();
         Set<Plato> platosIniciales = new HashSet<>();
         StaffABM staffABM = new StaffABM();
-        Staff responsable = staffABM.traer(1);
-        Staff responsable2 = staffABM.traer(2);
+        Staff responsable = staffABM.traerPorDni(30111222);
+        Staff responsable2 = staffABM.traerPorDni(28555111);
 
         abm.agregarPuestoDes( true, "Kiddo's", 30, staffInicial, platosIniciales, "PUESTO-001", responsable, 2, 70.0f);
 
