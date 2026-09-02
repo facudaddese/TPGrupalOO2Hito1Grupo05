@@ -17,6 +17,10 @@ public class StaffABM {
         return dao.traer(id);
     }
 
+    public Staff traerPorDni(int dni) {
+        return dao.traerPorDni(dni);
+    }
+
     //Cocinero
     public int agregar(String nombre, String apellido, int dni, LocalDate fechaNacimiento, LocalDate fechaIngreso, int sueldo, String especialidadCulinaria, double plusPorCategoria) throws Exception {
 
