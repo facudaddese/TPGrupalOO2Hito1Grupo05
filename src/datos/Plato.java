@@ -2,7 +2,7 @@ package datos;
 
 public class Plato {
 
-    private long idPlato;
+    private int idPlato;
     private String nombre;
     private long precio;
     private long costoProduccion;
@@ -16,28 +16,33 @@ public class Plato {
         this.costoProduccion = costoProduccion;
     }
 
-    public long getIdPlato() {
+    public int getIdPlato() {
         return idPlato;
     }
-    public void setIdPlato(long idPlato) {
+    public void setIdPlato(int idPlato) {
         this.idPlato = idPlato;
     }
-    public String getNombre() {
-        return nombre;
-    }
+    public String getNombre() {return nombre;}
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
     public long getPrecio() {
         return precio;
     }
-    public void setPrecio(long precio) {
+
+    public void setPrecio(long precio) throws Exception {
+        if (precio < 0) {
+            throw new Exception("Precio no puede ser menor a 0!");
+        }
         this.precio = precio;
     }
     public long getCostoProduccion() {
         return costoProduccion;
     }
-    public void setCostoProduccion(long costoProduccion) {
+    public void setCostoProduccion(long costoProduccion) throws Exception {
+        if (costoProduccion < 0) {
+            throw new Exception("Costo no puede ser menor a 0!");
+        }
         this.costoProduccion = costoProduccion;
     }
 
