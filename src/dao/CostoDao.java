@@ -93,6 +93,4 @@ public class CostoDao {
 		return lista;
 		
 	}
-	
-
 }

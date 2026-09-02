@@ -16,7 +16,5 @@ public class TestAgregarFestival {
 	
 		System.out.printf("Id Festival creado: %d", ultimoIdFestival);
 
-	
 	}
-
 }

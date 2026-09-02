@@ -19,4 +19,5 @@
         
 <one-to-one name="festival" class="datos.Festival" constrained="true"/>        
     </class>
+
 </hibernate-mapping>

@@ -87,10 +87,5 @@ public class Costo {
 		return "Costo [id=" + id + ", costoSuperficies=" + costoSuperficies + ", costoMontaje=" + costoMontaje
 				+ ", plusElectricidad=" + plusElectricidad + ", sueldoBase=" + sueldoBase + "]";
 	}
-    
-    
-    
-    
-    
 
 }

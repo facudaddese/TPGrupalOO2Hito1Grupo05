@@ -75,8 +75,5 @@ public class Festival {
 		return "Festival [id=" + id + ", nombre=" + nombre + ", temporada=" + temporada + ", fechaInicio=" + fechaInicio
 				+ ", fechaFin=" + fechaFin + ", costo=" + costo + "]";
 	};
-	
-	
-	
-	
+
 }

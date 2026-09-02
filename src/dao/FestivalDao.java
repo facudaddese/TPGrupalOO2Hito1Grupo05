@@ -80,8 +80,6 @@ public class FestivalDao {
 			return lista;
 			
 		}
-	
-	
 	public Festival traerFestivalYCosto(int idFestival) throws HibernateException{
 		Festival objeto = null;
 		try {
@@ -119,7 +117,5 @@ public class FestivalDao {
 			session.close();
 		}
 	}
-
-
 
 }

@@ -12,9 +12,7 @@ public class TestTraerFestivalYCosto {
 		int id = 5;
 		Festival f = abmFestival.traerFestivalyCosto(id);
 		System.out.printf("Festival y costo: %s",f);
-		
-		
-		
+
 	}
 
 }

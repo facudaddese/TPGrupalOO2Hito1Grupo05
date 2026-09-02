@@ -12,5 +12,4 @@ public class TestListarCostos {
 		System.out.println(abm.traer());
 
 	}
-
 }

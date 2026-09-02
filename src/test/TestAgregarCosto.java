@@ -26,9 +26,7 @@ public class TestAgregarCosto {
 		*/
 		
 		 abmCosto.agregar(3, 44, 30, 20, festival);
-		
-		
-		
+
 		
 		
 	}

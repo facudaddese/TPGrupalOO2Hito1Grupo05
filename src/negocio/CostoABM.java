@@ -49,7 +49,6 @@ public class CostoABM {
 		return dao.agregar(c);
 		
 	}
-	
 	public void modificar(Costo c) throws Exception {
         Costo existe = dao.traer(c.getId());
         if (existe == null ) {
@@ -67,6 +66,5 @@ public class CostoABM {
         dao.eliminar(c);
     }
 
-    
 	
 }

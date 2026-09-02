@@ -58,6 +58,4 @@ public class FestivalABM {
 		dao.eliminar(c);
 	}
 
-
-
 }
