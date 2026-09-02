@@ -2,6 +2,7 @@ package dao;
 
 import datos.Staff;
 import datos.UnidadDeVenta;
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -119,6 +120,40 @@ public class UnidadDeVentaDao {
         }
         return lista;
 
+    }
+
+    public UnidadDeVenta traerUnidadDeVentaYStaff(int idUnidadDeVenta){
+
+        UnidadDeVenta objeto = null;
+        try {
+            iniciaOperacion();
+            objeto = (UnidadDeVenta) session.get(UnidadDeVenta.class, idUnidadDeVenta);
+            if(objeto != null){
+                Hibernate.initialize(objeto.getLstStaff());
+            }
+        }catch(HibernateException he){
+            manejaExcepcion(he);
+        }finally {
+            session.close();
+        }
+        return objeto;
+    }
+
+    public UnidadDeVenta traerUnidadDeVentaYPlatos(int idUnidadDeVenta){
+
+        UnidadDeVenta objeto = null;
+        try {
+            iniciaOperacion();
+            objeto = (UnidadDeVenta) session.get(UnidadDeVenta.class, idUnidadDeVenta);
+            if(objeto != null){
+                Hibernate.initialize(objeto.getLstPlatos());
+            }
+        }catch(HibernateException he){
+            manejaExcepcion(he);
+        }finally {
+            session.close();
+        }
+        return objeto;
     }
 
 }

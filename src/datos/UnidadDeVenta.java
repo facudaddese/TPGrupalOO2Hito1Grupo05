@@ -1,6 +1,6 @@
 package datos;
 
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
 public class UnidadDeVenta {
@@ -105,4 +105,28 @@ public class UnidadDeVenta {
                 ", activo=" + activo +
                 '}';
     }
+
+    public boolean agregarStaff(Staff staff){
+        if(staff == null){
+            return false;
+        }
+        if(this.lstStaff == null){
+            this.lstStaff = new HashSet<>();
+        }
+        return this.lstStaff.add(staff);
+    }
+
+    public boolean agregarPlato(Plato plato){
+
+        if(plato == null){
+            return false;
+        }
+        if(this.lstPlatos == null){
+            this.lstPlatos = new HashSet<>();
+        }
+
+        return this.lstPlatos.add(plato);
+
+    }
+
 }
