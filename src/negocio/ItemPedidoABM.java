@@ -9,7 +9,7 @@ public class ItemPedidoABM {
 
     ItemPedidoDao dao = new ItemPedidoDao();
 
-    public ItemPedido traer(long idPlato) {
+    public ItemPedido traer(int idPlato) {
         return dao.traer(idPlato);
     }
 

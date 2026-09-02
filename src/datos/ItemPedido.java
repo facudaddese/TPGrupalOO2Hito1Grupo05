@@ -2,7 +2,7 @@ package datos;
 
 public class ItemPedido {
 
-    private long idItemPedido;
+    private int idItemPedido;
     private Plato plato;
     private int cantidad;
     private Pedido pedido;
@@ -14,10 +14,10 @@ public class ItemPedido {
         this.cantidad = cantidad;
         this.pedido = new Pedido();
     }
-    public long getIdItemPedido() {
+    public int getIdItemPedido() {
         return idItemPedido;
     }
-    public void setIdItemPedido(long idItemPedido) {
+    public void setIdItemPedido(int idItemPedido) {
         this.idItemPedido = idItemPedido;
     }
     public Plato getPlato() {
@@ -29,9 +29,14 @@ public class ItemPedido {
     public int getCantidad() {
         return cantidad;
     }
-    public void setCantidad(int cantidad) {
+
+    public void setCantidad(int cantidad) throws Exception {
+        if(cantidad <= 0) {
+            throw new Exception("Cantidad debe ser mayor a 0");
+        }
         this.cantidad = cantidad;
     }
+
     public Pedido getPedido() {
         return pedido;
     }
