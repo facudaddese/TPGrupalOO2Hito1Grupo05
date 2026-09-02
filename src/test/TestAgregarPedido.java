@@ -1,24 +1,33 @@
 package test;
 
+import datos.Festival;
+import datos.UnidadDeVenta;
+import negocio.FestivalABM;
 import negocio.PedidoABM;
+import negocio.UnidadDeVentaABM;
+
+import java.time.LocalDate;
 
 public class TestAgregarPedido {
 
     static void main(String[] args) {
 
         PedidoABM abm = new PedidoABM();
-        /*UnidadDeVentaABM uAbm = new UnidadDeVentaABM();
+        UnidadDeVentaABM uAbm = new UnidadDeVentaABM();
+        FestivalABM fAbm = new FestivalABM();
 
-        long idUDV = 1;
+        int idUDV = 1;
+        int idFest = 1;
         UnidadDeVenta udv = uAbm.traer(idUDV);
+        Festival fest = fAbm.traer(idFest);
 
         try {
             long ultimoId;
-            ultimoId = abm.agregar(LocalDate.of(2027,8,23),udv);
+            ultimoId = abm.agregar(LocalDate.of(2027,8,23),udv,fest);
             System.out.printf("Id cliente: %d", ultimoId);
         } catch (Exception e) {
             e.getMessage();
-        }*/
+        }
 
     }
 

@@ -1,6 +1,7 @@
 package negocio;
 
 import dao.PedidoDao;
+import datos.Festival;
 import datos.Pedido;
 import datos.UnidadDeVenta;
 
@@ -10,12 +11,12 @@ public class PedidoABM {
 
     PedidoDao dao = new PedidoDao();
 
-    public Pedido traer(long idPedido) {
+    public Pedido traer(int idPedido) {
         return dao.traer(idPedido);
     }
 
-    public int agregar(LocalDate fechaTransaccion, UnidadDeVenta unidadDeVenta) {
-        Pedido p = new Pedido(fechaTransaccion, unidadDeVenta);
+    public int agregar(LocalDate fechaTransaccion, UnidadDeVenta unidadDeVenta, Festival festival) {
+        Pedido p = new Pedido(fechaTransaccion, unidadDeVenta, festival);
         return dao.agregar(p);
     }
 

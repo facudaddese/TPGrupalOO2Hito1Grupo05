@@ -5,24 +5,26 @@ import java.util.Set;
 
 public class Pedido {
 
-    private long idPedido;
+    private int idPedido;
     private LocalDate fechaTransaccion;
     private UnidadDeVenta unidadDeVenta;
     private Set<ItemPedido> listaItems;
+    private Festival festival;
 
     public Pedido() {
     }
 
-    public Pedido(LocalDate fechaTransaccion, UnidadDeVenta unidadDeVenta) {
+    public Pedido(LocalDate fechaTransaccion, UnidadDeVenta unidadDeVenta, Festival festival) {
         this.fechaTransaccion = fechaTransaccion;
         this.unidadDeVenta = unidadDeVenta;
+        this.festival = festival;
     }
 
-    public long getIdPedido() {
+    public int getIdPedido() {
         return idPedido;
     }
 
-    public void setIdPedido(long idPedido) {
+    public void setIdPedido(int idPedido) {
         this.idPedido = idPedido;
     }
 
@@ -50,12 +52,20 @@ public class Pedido {
         this.listaItems = listaItems;
     }
 
+    public Festival getFestival() {
+        return festival;
+    }
+    public void setFestival(Festival festival) {
+        this.festival = festival;
+    }
+
     @Override
     public String toString() {
         return "Pedido{" +
-                "unidadDeVenta=" + unidadDeVenta +
+                "idPedido=" + idPedido +
                 ", fechaTransaccion=" + fechaTransaccion +
-                ", idPedido=" + idPedido +
+                ", unidadDeVenta=" + unidadDeVenta +
+                ", festival=" + festival +
                 '}';
     }
 }
