@@ -11,8 +11,8 @@ public class PuestoDesarmable extends UnidadDeVenta{
 
     }
 
-    public PuestoDesarmable(boolean activo, String nombreComercial, int superficie, Set<Staff> lstStaff, String codigo, Staff responsable, int cantidadCarpas, float tiempoMontaje) {
-        super(activo, nombreComercial, superficie, lstStaff, codigo, responsable);
+    public PuestoDesarmable(boolean activo, String nombreComercial, int superficie, Set<Staff> lstStaff, Set<Plato> lstPlatos,String codigo, Staff responsable, int cantidadCarpas, float tiempoMontaje) {
+        super(activo, nombreComercial, superficie, lstStaff, lstPlatos,codigo, responsable);
         this.cantidadCarpas = cantidadCarpas;
         this.tiempoMontaje = tiempoMontaje;
     }

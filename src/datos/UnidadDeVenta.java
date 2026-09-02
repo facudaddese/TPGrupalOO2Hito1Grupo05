@@ -10,8 +10,7 @@ public class UnidadDeVenta {
     private Staff responsable;
     private int superficie;
     private String codigo;
-    //TODO: Una vez agregados los platos agregar la lista de platos a UnidadDeVenta
-    //private Set<Plato> lstPlatos;
+    private Set<Plato> lstPlatos;
     private Set<Staff> lstStaff;
     private boolean activo;
 
@@ -19,11 +18,12 @@ public class UnidadDeVenta {
 
     }
 
-    public UnidadDeVenta(boolean activo, String nombreComercial, int superficie, Set<Staff> lstStaff, String codigo, Staff responsable) {
+    public UnidadDeVenta(boolean activo, String nombreComercial, int superficie, Set<Staff> lstStaff, Set<Plato> lstPlatos, String codigo, Staff responsable) {
         this.activo = activo;
         this.nombreComercial = nombreComercial;
         this.superficie = superficie;
         this.lstStaff = lstStaff;
+        this.lstPlatos = lstPlatos;
         this.codigo = codigo;
         this.responsable = responsable;
     }
@@ -68,6 +68,14 @@ public class UnidadDeVenta {
         this.codigo = codigo;
     }
 
+    public Set<Plato> getLstPlatos() {
+        return lstPlatos;
+    }
+
+    public void setLstPlatos(Set<Plato> lstPlatos){
+        this.lstPlatos = lstPlatos;
+    }
+
     public Set<Staff> getLstStaff() {
         return lstStaff;
     }
@@ -92,6 +100,7 @@ public class UnidadDeVenta {
                 ", responsable=" + responsable +
                 ", superficie=" + superficie +
                 ", codigo='" + codigo + '\'' +
+                ", lstPlatos=" + lstPlatos +
                 ", lstStaff=" + lstStaff +
                 ", activo=" + activo +
                 '}';

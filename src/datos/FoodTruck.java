@@ -11,8 +11,8 @@ public class FoodTruck extends UnidadDeVenta{
 
     }
 
-    public FoodTruck(boolean activo, String nombreComercial, int superficie, Set<Staff> lstStaff, String codigo, Staff responsable, String patente, boolean conexion) {
-        super(activo, nombreComercial, superficie, lstStaff, codigo, responsable);
+    public FoodTruck(boolean activo, String nombreComercial, int superficie, Set<Staff> lstStaff, Set<Plato> lstPlatos,String codigo, Staff responsable, String patente, boolean conexion) {
+        super(activo, nombreComercial, superficie, lstStaff, lstPlatos,codigo, responsable);
         this.patente = patente;
         this.conexion = conexion;
     }

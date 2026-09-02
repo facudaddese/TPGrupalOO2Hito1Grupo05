@@ -14,6 +14,10 @@
                      not-null="true" />
         <property name="superficie" column="superficie" type="integer" not-null="true" unique="true"/>
         <property name="codigo" column="codigo" type="string" not-null="true"/>
+        <set name='lstPlatos' lazy="true">
+            <key column="idUnidadVenta"/>
+            <one-to-many class="datos.Plato"/>
+        </set>
         <set name="lstStaff" lazy="true">
             <key column="idUnidadVenta"/>
             <one-to-many class="datos.Staff"/>

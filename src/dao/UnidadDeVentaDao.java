@@ -6,7 +6,9 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import javax.management.Query;
+import java.util.ArrayList;
+import java.util.List;
+import org.hibernate.query.Query;
 
 public class UnidadDeVentaDao {
 
@@ -14,9 +16,8 @@ public class UnidadDeVentaDao {
     private Transaction tx;
     private static UnidadDeVentaDao instancia = null;
 
-    protected UnidadDeVentaDao(){
+    protected UnidadDeVentaDao(){};
 
-    }
     public static UnidadDeVentaDao getInstance(){
         if(instancia == null){
             instancia = new UnidadDeVentaDao();
@@ -39,6 +40,7 @@ public class UnidadDeVentaDao {
         try{
             iniciaOperacion();
             id = Integer.parseInt(session.save(objeto).toString());
+            tx.commit();
         }catch (HibernateException he){
             manejaExcepcion(he);
         }finally {
@@ -71,26 +73,52 @@ public class UnidadDeVentaDao {
         }
     }
 
-    public UnidadDeVenta traer(long id){
+    public UnidadDeVenta traer(int id){
         UnidadDeVenta objeto = null;
         try{
             iniciaOperacion();
             objeto = (UnidadDeVenta) session.get(UnidadDeVenta.class, id);
-        } finally {
+        } catch (HibernateException he){
+            manejaExcepcion(he);
+        }
+        finally {
             session.close();
         }
         return objeto;
     }
 
-    /*public UnidadDeVenta traerPorCodigo(String codigo){
+    public UnidadDeVenta traerPorCodigo(String codigo){
         UnidadDeVenta objeto = null;
         try {
             iniciaOperacion();
             objeto = (UnidadDeVenta) session.createQuery(
                     "from UnidadDeVenta u where u.codigo = :codigo").setParameter("codigo", codigo).uniqueResult();
-        }finally {
+        } catch (HibernateException he){
+            manejaExcepcion(he);
+        }
+        finally {
             session.close();
         }
-    }*/
+        return objeto;
+    }
+
+    public List<UnidadDeVenta> traer(){
+
+        List<UnidadDeVenta> lista= new ArrayList<>();
+
+        try{
+            iniciaOperacion();
+            Query<UnidadDeVenta> query = session.createQuery(
+                    "from UnidadDeVenta u order by u.nombreComercial asc, u.codigo asc", UnidadDeVenta.class);
+            lista = query.getResultList();
+        } catch (HibernateException he){
+            manejaExcepcion(he);
+        }
+        finally {
+            session.close();
+        }
+        return lista;
+
+    }
 
 }
