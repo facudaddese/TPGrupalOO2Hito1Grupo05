@@ -12,7 +12,7 @@
                      class="datos.Staff"
                      column="idStaffResponsable"
                      not-null="true" />
-        <property name="superficie" column="superficie" type="integer" not-null="true" unique="true"/>
+        <property name="superficie" column="superficie" type="integer" not-null="true"/>
         <property name="codigo" column="codigo" type="string" not-null="true"/>
         <set name='lstPlatos' lazy="true">
             <key column="idUnidadVenta"/>

@@ -34,6 +34,55 @@ public class UnidadDeVentaABM {
         return dao.agregar(f);
     }
 
+    public boolean asignarStaff(int idUnidadDeVenta, int dni) throws Exception{
+        UnidadDeVenta existe = dao.traerUnidadDeVentaYStaff(idUnidadDeVenta);
+        if(existe == null){
+            throw new Exception("ERROR: No existe la unidad de venta indicada");
+        }
+
+        StaffABM staffABM = new StaffABM();
+        Staff agrego = staffABM.traerPorDni(dni);
+
+        if(agrego == null){
+            throw new Exception("ERROR: El miembro del staff indicado no existe");
+        }
+
+        boolean agregado = existe.agregarStaff(agrego);
+
+        if(!agregado){
+            throw new Exception("ERROR: El personal ya se encuentra asignado a esta unidad");
+        }
+
+        dao.actualizar(existe);
+
+        return true;
+
+    }
+
+    public boolean asignarPlato(int idUnidadDeVenta, int idPlato) throws Exception {
+        UnidadDeVenta existe = dao.traerUnidadDeVentaYPlatos(idUnidadDeVenta);
+        if(existe == null){
+            throw new Exception("ERROR: No existe la unidad de venta indicada");
+        }
+
+        PlatoABM platoABM = new PlatoABM();
+        Plato plato = platoABM.traer(idPlato);
+
+        if(plato == null){
+            throw new Exception("ERROR: El plato indicado no existe.");
+        }
+
+        boolean agregado = existe.agregarPlato(plato);
+        if(!agregado){
+            throw new Exception("ERROR: El playo ya se encuentra asignado a esta unidad");
+
+        }
+
+        dao.actualizar(existe);
+        return true;
+
+    }
+
     public void modificar(UnidadDeVenta u) throws Exception{
         UnidadDeVenta existe = dao.traerPorCodigo(u.getCodigo());
 

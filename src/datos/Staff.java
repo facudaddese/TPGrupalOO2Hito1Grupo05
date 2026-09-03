@@ -2,6 +2,7 @@ package datos;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.Objects;
 
 public class Staff {
     private int id;
@@ -95,5 +96,21 @@ public class Staff {
                 ", fechaIngreso=" + fechaIngreso +
                 ", sueldo=" + sueldo +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Staff)) return false;
+        Staff other = (Staff) o;
+        if(this.getId() != 0 && other.getId() != 0){
+            return this.getId() == other.getId();
+        }
+        return this.getDni() == other.getDni();
+    }
+
+    @Override
+    public int hashCode() {
+        return Integer.hashCode(getDni());
     }
 }

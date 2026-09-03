@@ -1,6 +1,6 @@
 package datos;
 
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
 public class UnidadDeVenta {
@@ -116,4 +116,40 @@ public class UnidadDeVenta {
                 ", activo=" + activo +
                 '}';
     }
+
+    public boolean agregarStaff(Staff staff){
+        if(staff == null){
+            return false;
+        }
+        if(this.lstStaff == null){
+            this.lstStaff = new HashSet<>();
+        }
+
+        for(Staff s : this.lstStaff){
+            if(s.getDni() == staff.getDni()){
+                return false;
+            }
+        }
+
+        return this.lstStaff.add(staff);
+    }
+
+    public boolean agregarPlato(Plato plato){
+
+        if(plato == null){
+            return false;
+        }
+        if(this.lstPlatos == null){
+            this.lstPlatos = new HashSet<>();
+        }
+        for(Plato p : this.lstPlatos){
+            if(p.getIdPlato() == plato.getIdPlato()){
+                return false;
+            }
+        }
+
+        return this.lstPlatos.add(plato);
+
+    }
+
 }
