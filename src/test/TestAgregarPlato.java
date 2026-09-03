@@ -3,7 +3,6 @@ package test;
 import negocio.PlatoABM;
 
 public class TestAgregarPlato {
-
     public static void main(String[] args) {
         PlatoABM abm = new PlatoABM();
 
@@ -18,6 +17,5 @@ public class TestAgregarPlato {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-
     }
 }

@@ -8,9 +8,7 @@ import negocio.CostoABM;
 import negocio.FestivalABM;
 
 public class TestAgregarFestival {
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+    public static void main(String[] args) {
 		/*
 		// 27-8
 		FestivalABM abm = new FestivalABM();
@@ -19,19 +17,17 @@ public class TestAgregarFestival {
 	
 		System.out.printf("Id Festival creado: %d", ultimoIdFestival);
 		*/
-		
-		// ajuste 1-9: Se puede generar un festival sin costo ni unidad de venta, después se agrega.
-		
-		// 1. Festival solo, sin costo ni unidades
-		FestivalABM abmFestival = new FestivalABM();
-		int idFestival = abmFestival.agregar("Gourmet", "invierno", LocalDate.of(2026, 9, 1), LocalDate.now());
 
-		// 2. Le agrego el costo al festival creado
-		Festival festival = abmFestival.traer(idFestival);
-		
-		CostoABM abmCosto = new CostoABM();
-		abmCosto.agregar(11, 2, 33, 44, festival);
-		
+        // ajuste 1-9: Se puede generar un festival sin costo ni unidad de venta, después se agrega.
 
-	}
+        // 1. Festival solo, sin costo ni unidades
+        FestivalABM abmFestival = new FestivalABM();
+        int idFestival = abmFestival.agregar("Gourmet", "invierno", LocalDate.of(2026, 9, 1), LocalDate.now());
+
+        // 2. Le agrego el costo al festival creado
+        Festival festival = abmFestival.traer(idFestival);
+
+        CostoABM abmCosto = new CostoABM();
+        abmCosto.agregar(11, 2, 33, 44, festival);
+    }
 }

@@ -19,8 +19,7 @@ public class TestAgregarItemPedido {
 
         System.out.println("idPedido = " + pedido.getIdPedido());
 
-        int ultimoId = ipAbm.agregar(plato,2,pedido);
+        int ultimoId = ipAbm.agregar(plato, 2, pedido);
         System.out.println("Item ultimo id:" + ultimoId);
-
     }
 }

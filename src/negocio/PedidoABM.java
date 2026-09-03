@@ -8,7 +8,6 @@ import datos.UnidadDeVenta;
 import java.time.LocalDate;
 
 public class PedidoABM {
-
     PedidoDao dao = new PedidoDao();
 
     public Pedido traer(int idPedido) {
@@ -35,5 +34,4 @@ public class PedidoABM {
     public Pedido traerPedidoEitemPedido(int idPedido) {
         return dao.traerPedidoEitemPedido(idPedido);
     }
-
 }

@@ -4,9 +4,7 @@ import datos.Pedido;
 import negocio.PedidoABM;
 
 public class TraerPedidoyUDV {
-
     static void main(String[] args) {
-
         int idPedido = 1;
 
         PedidoABM abm = new PedidoABM();

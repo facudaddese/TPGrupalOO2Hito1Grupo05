@@ -9,9 +9,7 @@ import negocio.UnidadDeVentaABM;
 import java.time.LocalDate;
 
 public class TestAgregarPedido {
-
     static void main(String[] args) {
-
         PedidoABM abm = new PedidoABM();
         UnidadDeVentaABM uAbm = new UnidadDeVentaABM();
         FestivalABM fAbm = new FestivalABM();
@@ -23,12 +21,10 @@ public class TestAgregarPedido {
 
         try {
             long ultimoId;
-            ultimoId = abm.agregar(LocalDate.of(2027,8,23),udv,fest);
+            ultimoId = abm.agregar(LocalDate.of(2027, 8, 23), udv, fest);
             System.out.printf("Id pedido: %d", ultimoId);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-
     }
-
 }

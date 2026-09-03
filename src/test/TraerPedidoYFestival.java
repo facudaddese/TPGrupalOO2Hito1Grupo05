@@ -7,7 +7,6 @@ import negocio.PedidoABM;
 
 public class TraerPedidoYFestival {
     static void main(String[] args) {
-
         int idPedido = 1;
 
         PedidoABM abm = new PedidoABM();

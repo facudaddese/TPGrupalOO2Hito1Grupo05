@@ -7,7 +7,6 @@ import negocio.PedidoABM;
 
 public class TraerItemPedidoYPlato {
     static void main(String[] args) {
-
         int idIP = 1;
 
         ItemPedidoABM abm = new ItemPedidoABM();

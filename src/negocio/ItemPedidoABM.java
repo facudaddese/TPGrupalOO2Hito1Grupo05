@@ -6,7 +6,6 @@ import datos.Pedido;
 import datos.Plato;
 
 public class ItemPedidoABM {
-
     ItemPedidoDao dao = new ItemPedidoDao();
 
     public ItemPedido traer(int idItemPedido) {
@@ -25,5 +24,4 @@ public class ItemPedidoABM {
     public void modificar(ItemPedido ip) {
         dao.actualizar(ip);
     }
-
 }

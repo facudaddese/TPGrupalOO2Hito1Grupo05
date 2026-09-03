@@ -4,10 +4,8 @@ import datos.Pedido;
 import negocio.PedidoABM;
 
 public class TestTraerPedidoEitemPedido {
-
     static void main(String[] args) {
-
-       int idPedido = 1;
+        int idPedido = 1;
 
         PedidoABM abm = new PedidoABM();
 
