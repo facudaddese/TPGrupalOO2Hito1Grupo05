@@ -25,7 +25,7 @@ public class TestAgregarUnidadDeVenta {
 
         //[DM 1.9.26] Una unidad de venta SIEMPRE pertenece a un festival, asi que traigo uno existente (primero correr testAgregarFestival)
         FestivalABM festivalABM = new FestivalABM();
-        Festival festival = festivalABM.traerFestivalyCosto(6);
+        Festival festival = festivalABM.traerFestivalyCosto(1);
         
         
 

@@ -13,7 +13,7 @@
         <property name="fechaFin" column="fecha_fin" type="LocalDate" />
         <!--<property name="costo" column="costo" type="int" /> -->
         
-        <one-to-one name="costo" class="datos.Costo" cascade="all"></one-to-one>
+        <one-to-one name="costo" class="datos.Costo" cascade="all"/>
         
         <!--Se agrega la siguiente etiqueta  para establecer la relación entre un festival y sus unidades de venta. -->
         <set name="unidadesDeVenta" table="unidadDeVenta" order-by="id_festival asc" inverse="true"

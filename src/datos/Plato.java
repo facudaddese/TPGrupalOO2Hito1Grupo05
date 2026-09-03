@@ -1,5 +1,7 @@
 package datos;
 
+import java.util.Objects;
+
 public class Plato {
 
     private int idPlato;
@@ -54,5 +56,18 @@ public class Plato {
                 ", precio=" + precio +
                 ", costoProduccion=" + costoProduccion +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Plato plato)) return false;
+        Plato other = (Plato) o;
+        return this.getIdPlato() != 0 && this.getIdPlato() == other.getIdPlato();
+    }
+
+    @Override
+    public int hashCode() {
+        return Integer.hashCode(getIdPlato());
     }
 }

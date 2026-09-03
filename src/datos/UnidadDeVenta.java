@@ -142,6 +142,11 @@ public class UnidadDeVenta {
         if(this.lstPlatos == null){
             this.lstPlatos = new HashSet<>();
         }
+        for(Plato p : this.lstPlatos){
+            if(p.getIdPlato() == plato.getIdPlato()){
+                return false;
+            }
+        }
 
         return this.lstPlatos.add(plato);
 
