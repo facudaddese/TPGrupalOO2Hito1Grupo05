@@ -23,6 +23,7 @@ public class CostoABM {
 		return dao.agregar(c);
 	}
 	
+	
 	public int agregar(Costo c) throws Exception {
 		//pre cond: validar que el objeto no exista en la lista	
 		//post cond: agregar el equipo. DAO asigna id autoincremental
