@@ -4,7 +4,7 @@ import negocio.PlatoABM;
 
 public class TestAgregarPlato {
 
-    static void main(String[] args) {
+    public static void main(String[] args) {
         PlatoABM abm = new PlatoABM();
 
         try {
