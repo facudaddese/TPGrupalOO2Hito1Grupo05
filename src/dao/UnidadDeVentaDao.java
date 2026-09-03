@@ -1,5 +1,6 @@
 package dao;
 
+import datos.Festival;
 import datos.Staff;
 import datos.UnidadDeVenta;
 import org.hibernate.Hibernate;
@@ -122,6 +123,33 @@ public class UnidadDeVentaDao {
 
     }
 
+	public List<UnidadDeVenta> traer(Festival f) {
+		List<UnidadDeVenta> lista = null;
+		try {
+			iniciaOperacion();
+			//clase UnidadDeVenta, captura las unidades de venta q pertenecen a un festival específico
+			String hQL = "from UnidadDeVenta u inner join fetch u.festival f where 	f.id=:idFestival";
+			lista = session.createQuery(hQL, UnidadDeVenta.class).setParameter("idFestival",
+					f.getId()).getResultList();
+		} finally {
+			session.close();
+		}
+		return lista;
+	}
+
+	public UnidadDeVenta traerUnidadDeVentaYFestival(int idUnidadDeVenta) {
+		UnidadDeVenta obj = null;
+		try {
+			iniciaOperacion();
+			//devuelve una unidad de venta con festival asociado
+			String hQL = "from UnidadDeVenta u inner join fetch u.festival f where u.id=:idUnidadDeVenta";
+					obj = (UnidadDeVenta) session.createQuery(hQL).setParameter("idUnidadDeVenta",
+							idUnidadDeVenta).uniqueResult();
+		} finally {
+			session.close();
+		}
+		return obj;
+	}
     public UnidadDeVenta traerUnidadDeVentaYStaff(int idUnidadDeVenta){
 
         UnidadDeVenta objeto = null;

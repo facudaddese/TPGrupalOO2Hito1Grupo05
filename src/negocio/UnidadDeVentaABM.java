@@ -14,22 +14,22 @@ public class UnidadDeVentaABM {
         return dao.traer(id);
     }
 
-    public int agregarPuestoDes(boolean activo, String nombreComercial, int superficie, Set<Staff> lstStaff, Set<Plato> lstPlatos, String codigo, Staff responsable, int cantidadCarpas, float tiempoMontaje) throws Exception {
+    public int agregarPuestoDes(boolean activo, String nombreComercial, int superficie, Set<Staff> lstStaff, Set<Plato> lstPlatos, String codigo, Staff responsable, Festival festival, int cantidadCarpas, float tiempoMontaje) throws Exception {
 
         if(dao.traerPorCodigo(codigo) != null){
             throw new Exception("ERROR: ya existe un puesto con el mismo codigo " + codigo);
         }
 
-        PuestoDesarmable p = new PuestoDesarmable(activo, nombreComercial, superficie, lstStaff, lstPlatos, codigo, responsable, cantidadCarpas, tiempoMontaje);
+        PuestoDesarmable p = new PuestoDesarmable(activo, nombreComercial, superficie, lstStaff, lstPlatos, codigo, responsable, festival, cantidadCarpas, tiempoMontaje);
 
         return dao.agregar(p);
     }
 
-    public int agregarFoodTruck(boolean activo, String nombreComercial, int superficie, Set<Staff> lstStaff, Set<Plato> lstPlatos,String codigo, Staff responsable, String patente, boolean conexion) throws Exception {
+    public int agregarFoodTruck(boolean activo, String nombreComercial, int superficie, Set<Staff> lstStaff, Set<Plato> lstPlatos,String codigo, Staff responsable, Festival festival, String patente, boolean conexion) throws Exception {
 
         if(dao.traerPorCodigo(codigo) != null) throw new Exception("ERROR: ya existe una unidad de venta con este codigo " + codigo);
 
-        FoodTruck f = new FoodTruck(activo, nombreComercial, superficie, lstStaff, lstPlatos, codigo, responsable, patente, conexion);
+        FoodTruck f = new FoodTruck(activo, nombreComercial, superficie, lstStaff, lstPlatos, codigo, responsable, festival, patente, conexion);
 
         return dao.agregar(f);
     }

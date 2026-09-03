@@ -61,7 +61,7 @@ public class PlatoDao {
         }
     }
 
-    public Plato traer(long idPlato) {
+    public Plato traer(int idPlato) {
         Plato objeto = null;
         try {
             iniciaOperacion();
