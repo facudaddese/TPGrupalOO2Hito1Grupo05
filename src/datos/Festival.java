@@ -92,7 +92,7 @@ public class Festival {
 	@Override
 	public String toString() {
 		return "Festival [id=" + id + ", nombre=" + nombre + ", temporada=" + temporada + ", fechaInicio=" + fechaInicio
-				+ ", fechaFin=" + fechaFin + ", costo=" + costo + ", unidadesDeVenta=" + unidadesDeVenta + "]";
+				+ ", fechaFin=" + fechaFin + ", costo=" + costo + "]";
 	}
 
 	@Override
