@@ -60,7 +60,7 @@ public class ItemPedidoDao {
         }
     }
 
-    public ItemPedido traerSinPedido(long idItemPedido) {
+    public ItemPedido traerSinPedido(int idItemPedido) {
         ItemPedido objeto = null;
         try {
             iniciaOperacion();
@@ -71,11 +71,23 @@ public class ItemPedidoDao {
         return objeto;
     }
 
-    public ItemPedido traer(long idItemPedido) {
+    public ItemPedido traer(int idItemPedido) {
         ItemPedido obj = null;
         try {
             iniciaOperacion();
-            String hQL = "from ItemPedido ip inner join fetch ip.pedido c where ip.idItemPedido=:idItemPedido";
+            String hQL = "from ItemPedido ip inner join fetch ip.pedido p where ip.idItemPedido=:idItemPedido";
+            obj = (ItemPedido) session.createQuery(hQL).setParameter("idItemPedido", idItemPedido).uniqueResult();
+        } finally {
+            session.close();
+        }
+        return obj;
+    }
+
+    public ItemPedido traerIPyPlato(int idItemPedido){
+        ItemPedido obj = null;
+        try {
+            iniciaOperacion();
+            String hQL = "from ItemPedido ip inner join fetch ip.plato p where ip.idItemPedido=:idItemPedido";
             obj = (ItemPedido) session.createQuery(hQL).setParameter("idItemPedido", idItemPedido).uniqueResult();
         } finally {
             session.close();

@@ -11,7 +11,7 @@ public class PlatoABM {
         return dao.traer(idPlato);
     }
 
-    public int agregar(String nombre, long precio, long costoProduccion) {
+    public int agregar(String nombre, long precio, long costoProduccion) throws Exception {
         Plato p = new Plato(nombre, precio, costoProduccion);
         return dao.agregar(p);
     }

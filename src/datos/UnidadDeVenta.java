@@ -13,12 +13,13 @@ public class UnidadDeVenta {
     private Set<Plato> lstPlatos;
     private Set<Staff> lstStaff;
     private boolean activo;
+    private Festival festival;  //1.9 DM:  se agrega relación 1 Festival - N Unidades de venta 
 
     public UnidadDeVenta() {
 
     }
 
-    public UnidadDeVenta(boolean activo, String nombreComercial, int superficie, Set<Staff> lstStaff, Set<Plato> lstPlatos, String codigo, Staff responsable) {
+    public UnidadDeVenta(boolean activo, String nombreComercial, int superficie, Set<Staff> lstStaff, Set<Plato> lstPlatos, String codigo, Staff responsable, Festival festival) {
         this.activo = activo;
         this.nombreComercial = nombreComercial;
         this.superficie = superficie;
@@ -26,6 +27,7 @@ public class UnidadDeVenta {
         this.lstPlatos = lstPlatos;
         this.codigo = codigo;
         this.responsable = responsable;
+        this.festival = festival;
     }
 
     public int getId() {
@@ -92,7 +94,16 @@ public class UnidadDeVenta {
         this.activo = activo;
     }
 
-    @Override
+    
+    public Festival getFestival() {
+		return festival;
+	}
+
+	public void setFestival(Festival festival) {
+		this.festival = festival;
+	}
+
+	@Override
     public String toString() {
         return "UnidadDeVenta{" +
                 "id=" + id +

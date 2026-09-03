@@ -1,5 +1,6 @@
 package dao;
 
+import datos.ItemPedido;
 import datos.Pedido;
 import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
@@ -61,7 +62,7 @@ public class PedidoDao {
         }
     }
 
-    public Pedido traer(long idPedido) {
+    public Pedido traer(int idPedido) {
         Pedido objeto = null;
         try {
             iniciaOperacion();
@@ -72,7 +73,7 @@ public class PedidoDao {
         return objeto;
     }
 
-    public Pedido traerPedidoEitemPedido(long idPedido) throws HibernateException {
+    public Pedido traerPedidoEitemPedido(int idPedido) throws HibernateException {
         Pedido objeto = null;
         try {
             iniciaOperacion();
@@ -84,6 +85,30 @@ public class PedidoDao {
             session.close();
         }
         return objeto;
+    }
+
+    public Pedido traerPedidoYUnidadDeVenta(int idPedido) throws HibernateException {
+        Pedido obj = null;
+        try {
+            iniciaOperacion();
+            String hQL = "from Pedido p inner join fetch p.unidadDeVenta u where p.idPedido=:idPedido";
+            obj = (Pedido) session.createQuery(hQL).setParameter("idPedido", idPedido).uniqueResult();
+        } finally {
+            session.close();
+        }
+        return obj;
+    }
+
+    public Pedido traerPedidoYFestival(int idPedido){
+        Pedido obj = null;
+        try {
+            iniciaOperacion();
+            String hQL = "from Pedido p inner join fetch p.festival f where p.idPedido=:idPedido";
+            obj = (Pedido) session.createQuery(hQL).setParameter("idPedido", idPedido).uniqueResult();
+        } finally {
+            session.close();
+        }
+        return obj;
     }
 
 

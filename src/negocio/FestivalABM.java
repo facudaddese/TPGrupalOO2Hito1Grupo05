@@ -18,11 +18,13 @@ public class FestivalABM {
 		return dao.traer()
 				;	}
 
+
+
 	public Festival traerFestivalyCosto(int idFestival) {
 		return dao.traerFestivalYCosto(idFestival);
 	}
-	
-	
+
+
 	public int agregar(Festival f) throws Exception {
 
 		if(dao.traerPorNombre(f.getNombre()) != null  ) {
@@ -33,10 +35,17 @@ public class FestivalABM {
 
 	}
 
-
+/*
 	public int agregar(String nombre, String temporada, LocalDate fechaInicio, LocalDate fechaFin, Costo costo) {
 		Festival f = new Festival(nombre, temporada, fechaInicio, fechaFin, costo);
+		//agregar versión sin costo o costo NULL
 		costo.setFestival(f);   // enlaza la referencia inversa: el foreign generator necesita costo.festival.id
+		return dao.agregar(f);
+	}
+	*/
+	public int agregar(String nombre, String temporada, LocalDate fechaInicio, LocalDate fechaFin) {
+		Festival f = new Festival(nombre, temporada, fechaInicio, fechaFin);
+		//agregar versión sin costo o costo NULL
 		return dao.agregar(f);
 	}
 
@@ -57,5 +66,11 @@ public class FestivalABM {
 		}
 		dao.eliminar(c);
 	}
+	
+	public Festival traerFestivalYUnidadDeVenta(int idFestival) {
+		return dao.traerFestivalYUnidadDeVenta(idFestival);
+		}
+
+
 
 }

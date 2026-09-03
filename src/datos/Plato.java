@@ -10,10 +10,10 @@ public class Plato {
     public Plato() {
     }
 
-    public Plato(String nombre, long precio, long costoProduccion) {
+    public Plato(String nombre, long precio, long costoProduccion) throws Exception {
         this.nombre = nombre;
-        this.precio = precio;
-        this.costoProduccion = costoProduccion;
+        setPrecio(precio);
+        setCostoProduccion(costoProduccion);
     }
 
     public int getIdPlato() {
