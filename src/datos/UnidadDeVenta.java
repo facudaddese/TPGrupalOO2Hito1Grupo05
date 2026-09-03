@@ -113,6 +113,13 @@ public class UnidadDeVenta {
         if(this.lstStaff == null){
             this.lstStaff = new HashSet<>();
         }
+
+        for(Staff s : this.lstStaff){
+            if(s.getDni() == staff.getDni()){
+                return false;
+            }
+        }
+
         return this.lstStaff.add(staff);
     }
 

@@ -101,13 +101,16 @@ public class Staff {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Staff staff = (Staff) o;
-        return id == staff.id;
+        if (!(o instanceof Staff)) return false;
+        Staff other = (Staff) o;
+        if(this.getId() != 0 && other.getId() != 0){
+            return this.getId() == other.getId();
+        }
+        return this.getDni() == other.getDni();
     }
 
     @Override
     public int hashCode() {
-        return Integer.hashCode(id);
+        return Integer.hashCode(getDni());
     }
 }
