@@ -17,10 +17,4 @@
 - ItemPedido y Pedido 1-N Bidireccional - CDU: Agregar de ambos y traer Pedido con su lista de ItemPedido asociado (Malena Lescano)
 - Festival y Pedido 1-N Unidireccional - CDU: Traer Pedido con su Festival asociado (Malena Lescano)
 - UnidadDeVenta y Pedido 1-N Unidireccional - CDU: Traer Pedido con su UnidadDeVenta asociado (Malena Lescano)
-- UnidadDeVenta agregacion (Lautaro Gonzalez)
-- Agregacion de Staff a las diferentes unidades de venta (Lautaro Gonzalez)
-- Intento de agregar un Staff duplicado (Lautaro Gonzalez)
-- Intengo de agregar un Staff inexistente (Lautaro Gonzalez)
-- Agregacion de Plato a las diferentes unidades de venta (Lautaro Gonzalez)
-- Intengo de agregar un Plato duplicado (Lautaro Gonzalez)
-- Intento de agregar un Plato inexistente (Lautaro Gonzalez)
+- Unidad de venta y la relación de herenacia con PuestoDesarmable y FoodTruck y la relación 1-N con Plato y Staff
