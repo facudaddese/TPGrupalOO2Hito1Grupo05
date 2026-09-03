@@ -24,6 +24,9 @@
         </set>
         <property name="activo" column="activo" type="boolean" not-null="true"/>
 
+        <!--1.9 DM: relación: Muchas unidades de venta a un festival -->
+        <many-to-one name="festival" class="datos.Festival" column="id_festival" not-null="true"/>
+
         <joined-subclass name="datos.PuestoDesarmable" table="puestoDesarmable">
             <key column="idPuestoDesarmable"/>
             <property name="cantidadCarpas" column="cantidad_carpas" type="integer"/>
