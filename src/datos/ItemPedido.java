@@ -9,10 +9,10 @@ public class ItemPedido {
 
     public ItemPedido() {
     }
-    public ItemPedido(Plato plato, int cantidad, Pedido pedido) {
+    public ItemPedido(Plato plato, int cantidad, Pedido pedido) throws Exception {
         this.plato = plato;
-        this.cantidad = cantidad;
-        this.pedido = new Pedido();
+        setCantidad(cantidad);
+        this.pedido = pedido;
     }
     public int getIdItemPedido() {
         return idItemPedido;
@@ -48,7 +48,6 @@ public class ItemPedido {
     public String toString() {
         return "ItemPedido{" +
                 "idItemPedido=" + idItemPedido +
-                ", plato=" + plato +
                 ", cantidad=" + cantidad +
                 '}';
     }
