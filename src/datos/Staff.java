@@ -5,7 +5,7 @@ import java.time.Period;
 import java.util.Objects;
 
 public class Staff {
-    private int id;
+    private long id;
     private String nombre;
     private String apellido;
     private int dni;
@@ -25,11 +25,11 @@ public class Staff {
         this.sueldo = sueldo;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    protected void setId(int id) {
+    protected void setId(long id) {
         this.id = id;
     }
 
