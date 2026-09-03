@@ -15,6 +15,14 @@ public class PedidoABM {
         return dao.traer(idPedido);
     }
 
+    public Pedido traerPedidoYUnidadDeVenta(int idPedido) {
+        return dao.traerPedidoYUnidadDeVenta(idPedido);
+    }
+
+    public Pedido traerPedidoYFestival(int idPedido) {
+        return dao.traerPedidoYFestival(idPedido);
+    }
+
     public int agregar(LocalDate fechaTransaccion, UnidadDeVenta unidadDeVenta, Festival festival) {
         Pedido p = new Pedido(fechaTransaccion, unidadDeVenta, festival);
         return dao.agregar(p);
@@ -24,7 +32,7 @@ public class PedidoABM {
         dao.actualizar(p);
     }
 
-    public Pedido traerPedidoEitemPedido(long idPedido) {
+    public Pedido traerPedidoEitemPedido(int idPedido) {
         return dao.traerPedidoEitemPedido(idPedido);
     }
 

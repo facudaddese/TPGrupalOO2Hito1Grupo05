@@ -9,11 +9,15 @@ public class ItemPedidoABM {
 
     ItemPedidoDao dao = new ItemPedidoDao();
 
-    public ItemPedido traer(int idPlato) {
-        return dao.traer(idPlato);
+    public ItemPedido traer(int idItemPedido) {
+        return dao.traer(idItemPedido);
     }
 
-    public int agregar(Plato plato, int cantidad, Pedido pedido) {
+    public ItemPedido traerIPyPlato(int idItemPedido) {
+        return dao.traerIPyPlato(idItemPedido);
+    }
+
+    public int agregar(Plato plato, int cantidad, Pedido pedido) throws Exception {
         ItemPedido ip = new ItemPedido(plato, cantidad, pedido);
         return dao.agregar(ip);
     }

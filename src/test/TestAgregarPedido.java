@@ -24,9 +24,9 @@ public class TestAgregarPedido {
         try {
             long ultimoId;
             ultimoId = abm.agregar(LocalDate.of(2027,8,23),udv,fest);
-            System.out.printf("Id cliente: %d", ultimoId);
+            System.out.printf("Id pedido: %d", ultimoId);
         } catch (Exception e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
 
     }

@@ -64,8 +64,6 @@ public class Pedido {
         return "Pedido{" +
                 "idPedido=" + idPedido +
                 ", fechaTransaccion=" + fechaTransaccion +
-                ", unidadDeVenta=" + unidadDeVenta +
-                ", festival=" + festival +
                 '}';
     }
 }
