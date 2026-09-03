@@ -14,6 +14,14 @@
         <!--<property name="costo" column="costo" type="int" /> -->
         
         <one-to-one name="costo" class="datos.Costo" cascade="all"></one-to-one>
+        
+        <!--Se agrega la siguiente etiqueta  para establecer la relación entre un festival y sus unidades de venta. -->
+        <set name="unidadesDeVenta" table="unidadDeVenta" order-by="id_festival asc" inverse="true"
+			lazy="true" fetch="select">
+			<key column="id_festival" not-null="true" />
+			<one-to-many class="datos.UnidadDeVenta" />
+		</set>
+
 
     </class>
 
