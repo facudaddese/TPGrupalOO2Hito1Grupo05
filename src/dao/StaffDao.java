@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import datos.Festival;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -101,4 +102,6 @@ public class StaffDao {
         }
         return lista;
     }
+
+
 }

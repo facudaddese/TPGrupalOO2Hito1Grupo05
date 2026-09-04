@@ -3,6 +3,7 @@ package negocio;
 import dao.UnidadDeVentaDao;
 import datos.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
@@ -74,10 +75,9 @@ public class UnidadDeVentaABM {
             throw new Exception("ERROR: El playo ya se encuentra asignado a esta unidad");
 
         }
-
         dao.actualizar(existe);
-        return true;
 
+        return true;
     }
 
     public void modificar(UnidadDeVenta u) throws Exception {
@@ -88,22 +88,25 @@ public class UnidadDeVentaABM {
         }
 
         dao.actualizar(u);
-
     }
 
     public void eliminar(String codigo) throws Exception {
-
         UnidadDeVenta u = dao.traerPorCodigo(codigo);
         if (u == null) {
             throw new Exception("ERROR: No existe una unidad de venta con dicho codigo");
         }
         dao.eliminar(u);
-
-
     }
 
     public List<UnidadDeVenta> traer() {
         return dao.traer();
     }
 
+    public List<Staff> traerCocinerosDeFestivalEntre(String nombreFestival, LocalDate fechaDesde, LocalDate fechaHasta) {
+        return dao.traerCocinerosDeFestivalEntre(nombreFestival, fechaDesde, fechaHasta);
+    }
+
+    public List<Staff> traerCajerosDeFestivalPorTurnoYSueldo(String nombreFestival, String turno, int sueldo) {
+        return dao.traerCajerosDeFestivalPorTurnoYSueldo(nombreFestival, turno, sueldo);
+    }
 }
