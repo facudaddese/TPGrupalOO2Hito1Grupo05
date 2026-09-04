@@ -8,8 +8,10 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.hibernate.query.Query;
 
 public class UnidadDeVentaDao {
@@ -18,10 +20,13 @@ public class UnidadDeVentaDao {
     private Transaction tx;
     private static UnidadDeVentaDao instancia = null;
 
-    protected UnidadDeVentaDao(){};
+    protected UnidadDeVentaDao() {
+    }
 
-    public static UnidadDeVentaDao getInstance(){
-        if(instancia == null){
+    ;
+
+    public static UnidadDeVentaDao getInstance() {
+        if (instancia == null) {
             instancia = new UnidadDeVentaDao();
         }
         return instancia;
@@ -37,151 +42,195 @@ public class UnidadDeVentaDao {
         throw new HibernateException("ERROR en la capa de acceso a datos", he);
     }
 
-    public int agregar(UnidadDeVenta objeto){
+    public int agregar(UnidadDeVenta objeto) {
         int id = 0;
-        try{
+        try {
             iniciaOperacion();
             id = Integer.parseInt(session.save(objeto).toString());
             tx.commit();
-        }catch (HibernateException he){
+        } catch (HibernateException he) {
             manejaExcepcion(he);
-        }finally {
+        } finally {
             session.close();
         }
         return id;
     }
 
-    public void actualizar(UnidadDeVenta objeto){
-        try{
+    public void actualizar(UnidadDeVenta objeto) {
+        try {
             iniciaOperacion();
             session.update(objeto);
             tx.commit();
-        }catch (HibernateException he){
+        } catch (HibernateException he) {
             manejaExcepcion(he);
-        }finally {
+        } finally {
             session.close();
         }
     }
 
-    public void eliminar(UnidadDeVenta objeto){
-        try{
+    public void eliminar(UnidadDeVenta objeto) {
+        try {
             iniciaOperacion();
             session.delete(objeto);
             tx.commit();
-        }catch (HibernateException he){
+        } catch (HibernateException he) {
             manejaExcepcion(he);
-        }finally {
+        } finally {
             session.close();
         }
     }
 
-    public UnidadDeVenta traer(int id){
+    public UnidadDeVenta traer(int id) {
         UnidadDeVenta objeto = null;
-        try{
+        try {
             iniciaOperacion();
             objeto = (UnidadDeVenta) session.get(UnidadDeVenta.class, id);
-        } catch (HibernateException he){
+        } catch (HibernateException he) {
             manejaExcepcion(he);
-        }
-        finally {
+        } finally {
             session.close();
         }
         return objeto;
     }
 
-    public UnidadDeVenta traerPorCodigo(String codigo){
+    public UnidadDeVenta traerPorCodigo(String codigo) {
         UnidadDeVenta objeto = null;
         try {
             iniciaOperacion();
             objeto = (UnidadDeVenta) session.createQuery(
                     "from UnidadDeVenta u where u.codigo = :codigo").setParameter("codigo", codigo).uniqueResult();
-        } catch (HibernateException he){
+        } catch (HibernateException he) {
             manejaExcepcion(he);
-        }
-        finally {
+        } finally {
             session.close();
         }
         return objeto;
     }
 
-    public List<UnidadDeVenta> traer(){
+    public List<UnidadDeVenta> traer() {
 
-        List<UnidadDeVenta> lista= new ArrayList<>();
+        List<UnidadDeVenta> lista = new ArrayList<>();
 
-        try{
+        try {
             iniciaOperacion();
             Query<UnidadDeVenta> query = session.createQuery(
                     "from UnidadDeVenta u order by u.nombreComercial asc, u.codigo asc", UnidadDeVenta.class);
             lista = query.getResultList();
-        } catch (HibernateException he){
+        } catch (HibernateException he) {
             manejaExcepcion(he);
-        }
-        finally {
+        } finally {
             session.close();
         }
         return lista;
 
     }
 
-	public List<UnidadDeVenta> traer(Festival f) {
-		List<UnidadDeVenta> lista = null;
-		try {
-			iniciaOperacion();
-			//clase UnidadDeVenta, captura las unidades de venta q pertenecen a un festival específico
-			String hQL = "from UnidadDeVenta u inner join fetch u.festival f where 	f.id=:idFestival";
-			lista = session.createQuery(hQL, UnidadDeVenta.class).setParameter("idFestival",
-					f.getId()).getResultList();
-		} finally {
-			session.close();
-		}
-		return lista;
-	}
+    public List<UnidadDeVenta> traer(Festival f) {
+        List<UnidadDeVenta> lista = null;
+        try {
+            iniciaOperacion();
+            //clase UnidadDeVenta, captura las unidades de venta q pertenecen a un festival específico
+            String hQL = "from UnidadDeVenta u inner join fetch u.festival f where 	f.id=:idFestival";
+            lista = session.createQuery(hQL, UnidadDeVenta.class).setParameter("idFestival",
+                    f.getId()).getResultList();
+        } finally {
+            session.close();
+        }
+        return lista;
+    }
 
-	public UnidadDeVenta traerUnidadDeVentaYFestival(int idUnidadDeVenta) {
-		UnidadDeVenta obj = null;
-		try {
-			iniciaOperacion();
-			//devuelve una unidad de venta con festival asociado
-			String hQL = "from UnidadDeVenta u inner join fetch u.festival f where u.id=:idUnidadDeVenta";
-					obj = (UnidadDeVenta) session.createQuery(hQL).setParameter("idUnidadDeVenta",
-							idUnidadDeVenta).uniqueResult();
-		} finally {
-			session.close();
-		}
-		return obj;
-	}
-    public UnidadDeVenta traerUnidadDeVentaYStaff(int idUnidadDeVenta){
+    public UnidadDeVenta traerUnidadDeVentaYFestival(int idUnidadDeVenta) {
+        UnidadDeVenta obj = null;
+        try {
+            iniciaOperacion();
+            //devuelve una unidad de venta con festival asociado
+            String hQL = "from UnidadDeVenta u inner join fetch u.festival f where u.id=:idUnidadDeVenta";
+            obj = (UnidadDeVenta) session.createQuery(hQL).setParameter("idUnidadDeVenta",
+                    idUnidadDeVenta).uniqueResult();
+        } finally {
+            session.close();
+        }
+        return obj;
+    }
+
+    public UnidadDeVenta traerUnidadDeVentaYStaff(int idUnidadDeVenta) {
 
         UnidadDeVenta objeto = null;
         try {
             iniciaOperacion();
             objeto = (UnidadDeVenta) session.get(UnidadDeVenta.class, idUnidadDeVenta);
-            if(objeto != null){
+            if (objeto != null) {
                 Hibernate.initialize(objeto.getLstStaff());
             }
-        }catch(HibernateException he){
+        } catch (HibernateException he) {
             manejaExcepcion(he);
-        }finally {
+        } finally {
             session.close();
         }
         return objeto;
     }
 
-    public UnidadDeVenta traerUnidadDeVentaYPlatos(int idUnidadDeVenta){
+    public UnidadDeVenta traerUnidadDeVentaYPlatos(int idUnidadDeVenta) {
 
         UnidadDeVenta objeto = null;
         try {
             iniciaOperacion();
             objeto = (UnidadDeVenta) session.get(UnidadDeVenta.class, idUnidadDeVenta);
-            if(objeto != null){
+            if (objeto != null) {
                 Hibernate.initialize(objeto.getLstPlatos());
             }
-        }catch(HibernateException he){
+        } catch (HibernateException he) {
             manejaExcepcion(he);
-        }finally {
+        } finally {
             session.close();
         }
         return objeto;
     }
 
+    public List<Staff> traerCocinerosDeFestivalEntre(String nombreFestival, LocalDate fechaDesde, LocalDate fechaHasta) {
+        List<Staff> lista = new ArrayList<>();
+        try {
+            iniciaOperacion();
+            Query<Staff> query = session.createQuery(
+                    "select s from UnidadDeVenta u " +
+                            "join u.lstStaff s " +
+                            "join u.festival f " +
+                            "where f.nombre = :nombreFestival " +
+                            "and s.class = Cocinero " +
+                            "and s.fechaNacimiento between :fechaDesde and :fechaHasta",
+                    Staff.class
+            );
+            query.setParameter("nombreFestival", nombreFestival);
+            query.setParameter("fechaDesde", fechaDesde);
+            query.setParameter("fechaHasta", fechaHasta);
+            lista = query.getResultList();
+        } finally {
+            session.close();
+        }
+        return lista;
+    }
+
+    public List<Staff> traerCajerosDeFestivalPorTurnoYSueldo(String nombreFestival, String turno, int sueldo) {
+        List<Staff> lista = new ArrayList<>();
+        try {
+            iniciaOperacion();
+            Query<Staff> query = session.createQuery(
+                    "select s from UnidadDeVenta u " +
+                            "join u.lstStaff s " +
+                            "join u.festival f " +
+                            "where f.nombre = :nombreFestival " +
+                            "and s.class = Cajero " +
+                            "and s.turno = :turno " +
+                            "and s.sueldo < :sueldo",
+                    Staff.class
+            );
+            query.setParameter("nombreFestival", nombreFestival);
+            query.setParameter("turno", turno);
+            query.setParameter("sueldo", sueldo);
+            lista = query.getResultList();
+        } finally {
+            session.close();
+        }
+        return lista;
+    }
 }
