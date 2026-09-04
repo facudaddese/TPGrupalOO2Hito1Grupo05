@@ -25,6 +25,6 @@ public class Cajero extends Staff {
     public String toString() {
         return "Cajero{" +
                 "turno='" + turno + '\'' +
-                '}';
+                "} " + super.toString();
     }
 }

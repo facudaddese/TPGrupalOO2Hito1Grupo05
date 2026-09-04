@@ -34,8 +34,8 @@ public class Cocinero extends Staff {
     @Override
     public String toString() {
         return "Cocinero{" +
-                "especialidadCulinaria='" + especialidadCulinaria + '\'' +
-                ", plusPorCategoria=" + plusPorCategoria +
-                '}';
+                "plusPorCategoria=" + plusPorCategoria +
+                ", especialidadCulinaria='" + especialidadCulinaria + '\'' +
+                "} " + super.toString();
     }
 }

@@ -21,8 +21,7 @@ public class StaffABM {
         return dao.traerPorDni(dni);
     }
 
-    //Cocinero
-    public int agregar(String nombre, String apellido, int dni, LocalDate fechaNacimiento, LocalDate fechaIngreso, int sueldo, String especialidadCulinaria, double plusPorCategoria) throws Exception {
+    public int agregarCocinero(String nombre, String apellido, int dni, LocalDate fechaNacimiento, LocalDate fechaIngreso, int sueldo, String especialidadCulinaria, double plusPorCategoria) throws Exception {
 
         if (dao.traerPorDni(dni) != null)
             throw new Exception("ERROR: ya existe un integrante del Staff con el mismo DNI " + dni);
@@ -32,8 +31,7 @@ public class StaffABM {
         return dao.agregar(c);
     }
 
-    //Cajero
-    public int agregar(String nombre, String apellido, int dni, LocalDate fechaNacimiento, LocalDate fechaIngreso, int sueldo, String turno) throws Exception {
+    public int agregarCajero(String nombre, String apellido, int dni, LocalDate fechaNacimiento, LocalDate fechaIngreso, int sueldo, String turno) throws Exception {
 
         if (dao.traerPorDni(dni) != null)
             throw new Exception("ERROR: ya existe un integrante del Staff con el mismo DNI " + dni);

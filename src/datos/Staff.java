@@ -87,7 +87,7 @@ public class Staff {
 
     @Override
     public String toString() {
-        return "Staff{" +
+        return "{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", apellido='" + apellido + '\'' +
