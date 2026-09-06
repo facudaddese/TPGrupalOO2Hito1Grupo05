@@ -6,6 +6,8 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.util.List;
+
 public class PlatoDao {
     private static Session session;
     private Transaction tx;
@@ -84,6 +86,18 @@ public class PlatoDao {
         }
         return objeto != null;
 
+    }
+
+    public List<Plato> traerPlatosPorTexto(String texto) {
+        List<Plato> platos = null;
+        try {
+            iniciaOperacion();
+            String hql = "from Plato p where lower(p.nombre) like lower(:texto)";
+            platos  = session.createQuery(hql, Plato.class).setParameter("texto", "%" + texto + "%").list();
+        } finally {
+            session.close();
+        }
+        return platos;
     }
 
 }

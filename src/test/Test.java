@@ -1,5 +1,6 @@
 package test;
 
+import datos.Plato;
 import datos.Staff;
 import datos.UnidadDeVenta;
 import negocio.PlatoABM;
@@ -65,6 +66,9 @@ public class Test {
             System.out.println(e.getMessage());
         }
 
+        //Test traer platos que contengan el texto pasado por parametro en el nombre
+        List<Plato> platosConNombre = abmPlato.traerPlatosPorTexto("Mila");
+        platosConNombre.forEach(System.out::println);
 
 
     }

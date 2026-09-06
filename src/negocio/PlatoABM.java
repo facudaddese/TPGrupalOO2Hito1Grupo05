@@ -14,6 +14,10 @@ public class PlatoABM {
         return dao.traer(idPlato);
     }
 
+    public List<Plato> traerPlatosPorTexto(String texto) {
+        return dao.traerPlatosPorTexto(texto);
+    }
+
     public int agregar(String nombre, long precio, long costoProduccion, UnidadDeVenta udv) throws Exception {
         if (dao.existePlatoEnUnidad(nombre, udv)) {
             throw new Exception(
