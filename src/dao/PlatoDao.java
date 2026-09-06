@@ -93,7 +93,19 @@ public class PlatoDao {
         try {
             iniciaOperacion();
             String hql = "from Plato p where lower(p.nombre) like lower(:texto)";
-            platos  = session.createQuery(hql, Plato.class).setParameter("texto", "%" + texto + "%").list();
+            platos = session.createQuery(hql, Plato.class).setParameter("texto", "%" + texto + "%").list();
+        } finally {
+            session.close();
+        }
+        return platos;
+    }
+
+    public List<Object[]> traerRankingPlatosMasVendidosDeUnaUDV( UnidadDeVenta udv) {
+        List<Object[]>  platos = null;
+        try {
+            iniciaOperacion();
+            String hql = "select p, sum(i.cantidad) from Plato p inner join p.listaItems i where p.unidadDeVenta=:udv group by p order by sum(i.cantidad) desc";
+            platos = session.createQuery(hql, Object[].class).setParameter("udv", udv).getResultList();
         } finally {
             session.close();
         }

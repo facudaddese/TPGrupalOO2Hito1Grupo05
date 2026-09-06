@@ -80,4 +80,13 @@ public class Pedido {
     public int hashCode() {
         return Objects.hash(getIdPedido(), getFechaTransaccion(), getUnidadDeVenta(), getListaItems(), getFestival());
     }
+
+    public long getTotal() {
+        long total = 0;
+
+        for (ItemPedido item : listaItems) {
+            total += item.getSubtotal();
+        }
+        return total;
+    }
 }

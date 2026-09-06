@@ -8,13 +8,15 @@ public class ItemPedido {
     private Plato plato;
     private int cantidad;
     private Pedido pedido;
+    private long precio;
 
     public ItemPedido() {
     }
-    public ItemPedido(Plato plato, int cantidad, Pedido pedido) throws Exception {
+    public ItemPedido(Plato plato, int cantidad, Pedido pedido, long precio) throws Exception {
         this.plato = plato;
         setCantidad(cantidad);
         this.pedido = pedido;
+        this.precio = precio;
     }
     public int getIdItemPedido() {
         return idItemPedido;
@@ -22,12 +24,14 @@ public class ItemPedido {
     protected void setIdItemPedido(int idItemPedido) {
         this.idItemPedido = idItemPedido;
     }
+
     public Plato getPlato() {
         return plato;
     }
     public void setPlato(Plato plato) {
         this.plato = plato;
     }
+
     public int getCantidad() {
         return cantidad;
     }
@@ -44,6 +48,13 @@ public class ItemPedido {
     }
     public void setPedido(Pedido pedido) {
         this.pedido = pedido;
+    }
+
+    public long getPrecio() {
+        return precio;
+    }
+    public void setPrecio(long precio) {
+        this.precio = precio;
     }
 
     @Override
@@ -64,5 +75,9 @@ public class ItemPedido {
     @Override
     public int hashCode() {
         return Objects.hash(getPlato(), getCantidad(), getPedido());
+    }
+
+    public long getSubtotal() {
+        return cantidad * precio;
     }
 }

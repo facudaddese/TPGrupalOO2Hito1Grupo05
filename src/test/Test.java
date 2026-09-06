@@ -71,5 +71,15 @@ public class Test {
         platosConNombre.forEach(System.out::println);
 
 
+        //Ranking de platos mas vendidos de una unidad de venta especifica
+        List<Object[]> rankingDePlatos = abmPlato.traerRankingPlatosMasVendidosDeUnaUDV(udv);
+        for (Object[] obj : rankingDePlatos) {
+
+            Plato plato = (Plato) obj[0];
+            Long cantidad = (Long) obj[1];
+
+            System.out.println(plato.getNombre() + " - " + cantidad + " total de unidades vendidas");
+        }
+
     }
 }
