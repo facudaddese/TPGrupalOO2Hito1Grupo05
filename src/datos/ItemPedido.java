@@ -1,5 +1,7 @@
 package datos;
 
+import java.util.Objects;
+
 public class ItemPedido {
 
     private int idItemPedido;
@@ -17,7 +19,7 @@ public class ItemPedido {
     public int getIdItemPedido() {
         return idItemPedido;
     }
-    public void setIdItemPedido(int idItemPedido) {
+    protected void setIdItemPedido(int idItemPedido) {
         this.idItemPedido = idItemPedido;
     }
     public Plato getPlato() {
@@ -50,5 +52,17 @@ public class ItemPedido {
                 "idItemPedido=" + idItemPedido +
                 ", cantidad=" + cantidad +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        ItemPedido that = (ItemPedido) o;
+        return getCantidad() == that.getCantidad() && Objects.equals(getPlato(), that.getPlato()) && Objects.equals(getPedido(), that.getPedido());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getPlato(), getCantidad(), getPedido());
     }
 }

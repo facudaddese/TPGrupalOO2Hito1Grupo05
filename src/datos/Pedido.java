@@ -1,6 +1,7 @@
 package datos;
 
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.Set;
 
 public class Pedido {
@@ -24,7 +25,7 @@ public class Pedido {
         return idPedido;
     }
 
-    public void setIdPedido(int idPedido) {
+    protected void setIdPedido(int idPedido) {
         this.idPedido = idPedido;
     }
 
@@ -55,6 +56,7 @@ public class Pedido {
     public Festival getFestival() {
         return festival;
     }
+
     public void setFestival(Festival festival) {
         this.festival = festival;
     }
@@ -65,5 +67,17 @@ public class Pedido {
                 "idPedido=" + idPedido +
                 ", fechaTransaccion=" + fechaTransaccion +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Pedido pedido = (Pedido) o;
+        return getIdPedido() == pedido.getIdPedido() && Objects.equals(getFechaTransaccion(), pedido.getFechaTransaccion()) && Objects.equals(getUnidadDeVenta(), pedido.getUnidadDeVenta()) && Objects.equals(getListaItems(), pedido.getListaItems()) && Objects.equals(getFestival(), pedido.getFestival());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getIdPedido(), getFechaTransaccion(), getUnidadDeVenta(), getListaItems(), getFestival());
     }
 }
