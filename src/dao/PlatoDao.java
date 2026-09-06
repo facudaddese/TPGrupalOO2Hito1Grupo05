@@ -1,7 +1,7 @@
 package dao;
 
-import datos.Festival;
 import datos.Plato;
+import datos.UnidadDeVenta;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -40,6 +40,7 @@ public class PlatoDao {
             iniciaOperacion();
             session.update(objeto);
             tx.commit();
+
         } catch (HibernateException he) {
             manejaExcepcion(he);
             throw he;
@@ -70,6 +71,19 @@ public class PlatoDao {
             session.close();
         }
         return objeto;
+    }
+
+    public boolean existePlatoEnUnidad(String nombre, UnidadDeVenta udv) {
+        Plato objeto = null;
+        try {
+            String hql = "from Plato p where p.nombre= :nombre AND p.unidadDeVenta=:udv";
+            objeto  = (Plato) session.createQuery(hql).setParameter("nombre", nombre).setParameter("udv", udv).uniqueResult();
+
+        } finally {
+            session.close();
+        }
+        return objeto != null;
+
     }
 
 }
