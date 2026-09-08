@@ -1,6 +1,9 @@
 package test;
 
+import datos.Plato;
 import datos.Staff;
+import datos.UnidadDeVenta;
+import negocio.PlatoABM;
 import negocio.StaffABM;
 import negocio.UnidadDeVentaABM;
 
@@ -34,5 +37,49 @@ public class Test {
         List<Staff> listaCajeros = abmUDV.traerCajerosDeFestivalPorTurnoYSueldo("Gourmet", "noche", 1000000);
         listaCajeros.forEach(System.out::println);
         // FinTest - Facundo D'Addese
+
+        //Test agregar Platos - Malena Lescano
+        PlatoABM abmPlato = new PlatoABM();
+        UnidadDeVenta udv = abmUDV.traer(1);
+        UnidadDeVenta udv2 = abmUDV.traer(2);
+
+
+        abmPlato.agregar("Milanesa Simple", 10000, 3000, udv);
+        abmPlato.agregar("Milanesa Napolitana", 15000, 6000, udv);
+        abmPlato.agregar("Milanesa A Caballo", 15000, 6000, udv);
+        abmPlato.agregar("Ravioles", 9000, 3500, udv);
+        abmPlato.agregar("Sorrentinos", 12000, 5000, udv);
+        abmPlato.agregar("Lasagna", 14000, 5500, udv);
+
+        abmPlato.agregar("Pizza Muzarella", 11000, 4000, udv2);
+        abmPlato.agregar("Pizza Napolitana", 13000, 5000, udv2);
+        abmPlato.agregar("Pizza Especial", 16000, 7000, udv2);
+        abmPlato.agregar("Empanadas", 8000, 3000, udv2);
+        abmPlato.agregar("Hamburguesa Completa", 12500, 5000, udv2);
+        abmPlato.agregar("Hamburguesa Doble", 18000, 7500, udv2);
+
+        try {
+            // Caso de excepción
+            abmPlato.agregar("Ñoquis", -10000, 0, udv2);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        //Test traer platos que contengan el texto pasado por parametro en el nombre
+        List<Plato> platosConNombre = abmPlato.traerPlatosPorTexto("Mila");
+        platosConNombre.forEach(System.out::println);
+
+
+        //Ranking de platos mas vendidos de una unidad de venta especifica
+        List<Object[]> rankingDePlatos = abmPlato.traerRankingPlatosMasVendidosDeUnaUDV(udv);
+        for (Object[] obj : rankingDePlatos) {
+
+            Plato plato = (Plato) obj[0];
+            Long cantidad = (Long) obj[1];
+
+            System.out.println(plato.getNombre() + " - " + cantidad + " total de unidades vendidas");
+        }
+
     }
 }
