@@ -75,9 +75,24 @@ public class PlatoDao {
         return objeto;
     }
 
+    public Plato traerPorNombre(String nombre){
+        Plato objeto = null;
+        try{
+            iniciaOperacion();
+            objeto = (Plato) session.createQuery("from Plato p where p.nombre = :nombre")
+                    .setParameter("nombre", nombre).uniqueResult();
+        }catch (HibernateException he){
+            manejaExcepcion(he);
+        }finally {
+            session.close();
+        }
+        return objeto;
+    }
+
     public boolean existePlatoEnUnidad(String nombre, UnidadDeVenta udv) {
         Plato objeto = null;
         try {
+            iniciaOperacion();
             String hql = "from Plato p where p.nombre= :nombre AND p.unidadDeVenta=:udv";
             objeto  = (Plato) session.createQuery(hql).setParameter("nombre", nombre).setParameter("udv", udv).uniqueResult();
 

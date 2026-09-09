@@ -9,7 +9,7 @@ import negocio.UnidadDeVentaABM;
 import java.time.LocalDate;
 
 public class TestAgregarPedido {
-    static void main(String[] args) {
+    public static void main(String[] args) {
         PedidoABM abm = new PedidoABM();
         UnidadDeVentaABM uAbm = new UnidadDeVentaABM();
         FestivalABM fAbm = new FestivalABM();

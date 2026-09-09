@@ -1,8 +1,10 @@
 package test;
 
+import datos.Festival;
 import datos.Plato;
 import datos.Staff;
 import datos.UnidadDeVenta;
+import negocio.FestivalABM;
 import negocio.PlatoABM;
 import negocio.StaffABM;
 import negocio.UnidadDeVentaABM;
@@ -14,6 +16,19 @@ public class Test {
     public static void main(String[] args) throws Exception {
         StaffABM abmStaff = new StaffABM();
         UnidadDeVentaABM abmUDV = new UnidadDeVentaABM();
+        FestivalABM festivalABM = new FestivalABM();
+        PlatoABM abmPlato = new PlatoABM();
+
+        Festival festival = festivalABM.traerFestivalyCosto(1);
+
+        ///Test para agregar unidades de venta (Lautaro Gonzalez)
+        try {
+            abmUDV.agregarPuestoDes(true, "Kiddo's", 30, "PUESTO-001", festival, 2, 70.0f);
+            abmUDV.agregarFoodTruck(true, "Pancheria", 20, "PUESTO-002", festival, "ABC123", true);
+            System.out.println("Unidades de venta agregadas correctamente.");
+        } catch (Exception e) {
+            System.out.println("Aviso unidades: " + e.getMessage());
+        }
 
         //InicioTest - Facundo D'Addese
         //Agrego cocineros y cajeros
@@ -23,6 +38,20 @@ public class Test {
         abmStaff.agregarCajero("Ana", "Gómez", 28555111, LocalDate.of(1995, 3, 20), LocalDate.of(2024, 2, 1), 1300000, "mañana");
         abmStaff.agregarCajero("Milagros", "Santos", 17481765, LocalDate.of(1985, 9, 5), LocalDate.of(2019, 10, 28), 200000, "noche");
         abmStaff.agregarCajero("Adrian", "Martinez", 99761329, LocalDate.of(1992, 7, 7), LocalDate.of(2023, 12, 9), 900000, "noche");
+
+        ///Asignamos Staff a unidades de venta (Lautaro Gonzalez)
+        Staff staff = abmStaff.traerPorDni(30111222);
+        Staff staff2 = abmStaff.traerPorDni(14852741);
+
+        try {
+            System.out.println("\n--- TEST: Asignacion de Staff ---");
+            abmUDV.asignarStaff("PUESTO-001", staff);
+            abmUDV.asignarStaff("PUESTO-002", staff2);
+            System.out.println("Personal asignado con éxito.");
+        } catch (Exception e) {
+            System.out.println("Fallo en asignación de staff: " + e.getMessage());
+        }
+
 
         //Creo una lista para traer a todos los cocineros de un festival especifico entre un rango de fechas
         //La lista va a estar vacia hasta que se agreguen los cocineros a la unidad de venta del festival
@@ -39,7 +68,7 @@ public class Test {
         // FinTest - Facundo D'Addese
 
         //Test agregar Platos - Malena Lescano
-        PlatoABM abmPlato = new PlatoABM();
+
         UnidadDeVenta udv = abmUDV.traer(1);
         UnidadDeVenta udv2 = abmUDV.traer(2);
 
@@ -64,6 +93,20 @@ public class Test {
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
+        }
+
+        ///Asignamos platos a unidades de venta (Lautaro Gonzalez)
+
+        Plato plato1 = abmPlato.traerPorNombre("Milanesa Simple");
+        Plato plato2 = abmPlato.traerPorNombre("Ravioles");
+
+        try {
+            System.out.println("\n--- TEST: Asignacion de Platos ---");
+            abmUDV.asignarPlato("PUESTO-001", plato1);
+            abmUDV.asignarPlato("PUESTO-002", plato2);
+            System.out.println("Platos agregados con éxito.");
+        } catch (Exception e) {
+            System.out.println("Fallo inesperado: " + e.getMessage());
         }
 
         //Test traer platos que contengan el texto pasado por parametro en el nombre
