@@ -187,6 +187,66 @@ public class UnidadDeVentaDao {
         return objeto;
     }
 
+    public UnidadDeVenta traerPorCodigoYPlato(String codigo){
+        UnidadDeVenta objeto = null;
+        try{
+            iniciaOperacion();
+            objeto = (UnidadDeVenta) session.createQuery("from UnidadDeVenta u where u.codigo = :codigo")
+                    .setParameter("codigo", codigo)
+                    .uniqueResult();
+            if(objeto != null){
+                Hibernate.initialize(objeto.getLstPlatos());
+            }
+        }catch (HibernateException he){
+            manejaExcepcion(he);
+        }finally {
+            session.close();
+        }
+
+        return objeto;
+
+    }
+
+    public UnidadDeVenta traerPorCodigoYStaff(String codigo){
+        UnidadDeVenta objeto = null;
+        try {
+            iniciaOperacion();
+            objeto = (UnidadDeVenta) session.createQuery("from UnidadDeVenta u where u.codigo = :codigo")
+                    .setParameter("codigo", codigo)
+                    .uniqueResult();
+            if(objeto != null){
+                Hibernate.initialize(objeto.getLstStaff());
+            }
+        }catch (HibernateException he){
+            manejaExcepcion(he);
+        }finally {
+            session.close();
+        }
+
+        return objeto;
+
+    }
+
+    public UnidadDeVenta traerPorCodigoYPedidos(String codigo){
+        UnidadDeVenta objeto = null;
+        try {
+            iniciaOperacion();
+            objeto = (UnidadDeVenta) session.createQuery("from UnidadDeVenta u where u.codigo = :codigo")
+                    .setParameter("codigo", codigo)
+                    .uniqueResult();
+            if(objeto != null){
+                Hibernate.initialize(objeto.getLstPedidos());
+            }
+        }catch (HibernateException he){
+            manejaExcepcion(he);
+        }finally {
+            session.close();
+        }
+
+        return objeto;
+
+    }
+
     public List<Staff> traerCocinerosDeFestivalEntre(String nombreFestival, LocalDate fechaDesde, LocalDate fechaHasta) {
         List<Staff> lista = new ArrayList<>();
         try {
