@@ -14,6 +14,10 @@ public class PlatoABM {
         return dao.traer(idPlato);
     }
 
+    public Plato traerPorNombre(String nombre){
+        return dao.traerPorNombre(nombre);
+    }
+
     public List<Plato> traerPlatosPorTexto(String texto) {
         return dao.traerPlatosPorTexto(texto);
     }

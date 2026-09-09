@@ -84,6 +84,8 @@ public class UnidadDeVentaABM {
         return true;
     }
 
+
+
     public void modificar(UnidadDeVenta u) throws Exception {
         UnidadDeVenta existe = dao.traerPorCodigo(u.getCodigo());
 

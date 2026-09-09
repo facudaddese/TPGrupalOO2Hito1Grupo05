@@ -11,7 +11,7 @@
         <many-to-one name="responsable"
                      class="datos.Staff"
                      column="idStaffResponsable"
-                     not-null="true" />
+                     not-null="false" />
         <property name="superficie" column="superficie" type="integer" not-null="true"/>
         <property name="codigo" column="codigo" type="string" not-null="true"/>
         <set name='lstPlatos' lazy="true">
