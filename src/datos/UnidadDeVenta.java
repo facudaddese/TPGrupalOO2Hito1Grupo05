@@ -1,6 +1,7 @@
 package datos;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 public class UnidadDeVenta {
@@ -181,4 +182,15 @@ public class UnidadDeVenta {
 
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        UnidadDeVenta that = (UnidadDeVenta) o;
+        return Objects.equals(getCodigo(), that.getCodigo());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getCodigo());
+    }
 }

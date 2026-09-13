@@ -1,13 +1,7 @@
 package test;
 
-import datos.Festival;
-import datos.Plato;
-import datos.Staff;
-import datos.UnidadDeVenta;
-import negocio.FestivalABM;
-import negocio.PlatoABM;
-import negocio.StaffABM;
-import negocio.UnidadDeVentaABM;
+import datos.*;
+import negocio.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -18,6 +12,8 @@ public class Test {
         UnidadDeVentaABM abmUDV = new UnidadDeVentaABM();
         FestivalABM festivalABM = new FestivalABM();
         PlatoABM abmPlato = new PlatoABM();
+        PedidoABM abmPedido = new PedidoABM();
+        ItemPedidoABM abmItemPedido = new ItemPedidoABM();
 
         Festival festival = festivalABM.traerFestivalyCosto(1);
 
@@ -69,9 +65,9 @@ public class Test {
 
         //Test agregar Platos - Malena Lescano
 
+        System.out.println("\n--- TEST: Agregar Platos ---");
         UnidadDeVenta udv = abmUDV.traer(1);
         UnidadDeVenta udv2 = abmUDV.traer(2);
-
 
         abmPlato.agregar("Milanesa Simple", 10000, 3000, udv);
         abmPlato.agregar("Milanesa Napolitana", 15000, 6000, udv);
@@ -89,7 +85,30 @@ public class Test {
 
         try {
             // Caso de excepción
+            System.out.println("Caso de excepcion: ");
             abmPlato.agregar("Ñoquis", -10000, 0, udv2);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        System.out.println("\n--- TEST: Agregar Pedidos e ItemPedido ---");
+
+        //Test agregar Pedido - Malena Lescano
+        abmPedido.agregar(LocalDate.of(2026,9,1),udv,festival);
+        abmPedido.agregar(LocalDate.of(2026,9,4),udv,festival);
+        abmPedido.agregar(LocalDate.of(2026,9,11),udv,festival);
+        abmPedido.agregar(LocalDate.of(2026,9,10),udv,festival);
+
+        //Test agregar ItemPedido - Malena Lescano
+        abmItemPedido.agregar(abmPlato.traerPlatoYUnidadDeVenta("Milanesa Simple"),3,abmPedido.traerPedidoYUnidadDeVenta(1));
+        abmItemPedido.agregar(abmPlato.traerPlatoYUnidadDeVenta("Sorrentinos"),1,abmPedido.traerPedidoYUnidadDeVenta(1));
+        abmItemPedido.agregar(abmPlato.traerPlatoYUnidadDeVenta("Milanesa A Caballo"),2,abmPedido.traerPedidoYUnidadDeVenta(2));
+        abmItemPedido.agregar(abmPlato.traerPlatoYUnidadDeVenta("Milanesa A Caballo"),1,abmPedido.traerPedidoYUnidadDeVenta(4));
+
+        try {
+            //Caso de excepcion, este plato no pertenece a udv, pertenece a udv2
+            abmItemPedido.agregar(abmPlato.traerPlatoYUnidadDeVenta("Pizza Especial"),1,abmPedido.traerPedidoYUnidadDeVenta(1));
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -110,22 +129,40 @@ public class Test {
         }
 
         //Test traer platos que contengan el texto pasado por parametro en el nombre - Malena Lescano
-        System.out.println("Platos que contengan 'Mila' en su nombre:");
+        System.out.println("\n--- TEST: Traer Platos ---");
+        System.out.println("\nPlatos que contengan 'Mila' en su nombre:");
         List<Plato> platosConNombre = abmPlato.traerPlatosPorTexto("Mila");
         platosConNombre.forEach(System.out::println);
 
 
-        //Ranking de platos mas vendidos de una unidad de venta especifica
         //Ranking de platos mas vendidos de una unidad de venta especifica - Malena Lescano
-        System.out.println("Ranking de platos mas vendidos de" + udv.getNombreComercial() +":");
+        System.out.println("\nRanking de platos mas vendidos de " + udv.getNombreComercial() +":");
         List<Object[]> rankingDePlatos = abmPlato.traerRankingPlatosMasVendidosDeUnaUDV(udv);
         for (Object[] obj : rankingDePlatos) {
-
             Plato plato = (Plato) obj[0];
             Long cantidad = (Long) obj[1];
 
             System.out.println(plato.getNombre() + " - " + cantidad + " total de unidades vendidas");
         }
+
+        //Test traer pedidos realizados entre rango de fechas de una UDV especifica - Malena Lescano
+        System.out.println("\n--- TEST: Traer Pedidos ---");
+        LocalDate inicio = LocalDate.of(2026,9,1);
+        LocalDate fin = LocalDate.of(2026,9,10);
+        System.out.println("\nPedidos entre " + inicio + " y " + fin + " de " + udv.getNombreComercial());
+
+        List<Object[]> resultados = abmPedido.traerPedidosRealizadosEntreFechasDeUnaUDV(inicio, fin, udv);
+
+        for (Object[] fila : resultados) {
+            Pedido p = (Pedido) fila[0];
+            ItemPedido ip = (ItemPedido) fila[1];
+
+            System.out.println("=================================================");
+            System.out.println("Pedido ID: " + p.getIdPedido() + " | Fecha: " + p.getFechaTransaccion());
+            System.out.println("  -> Plato: " + abmPlato.traer(ip.getPlato().getIdPlato()) + ", cantidad: " + ip.getCantidad());
+        }
+
+
 
     }
 }
