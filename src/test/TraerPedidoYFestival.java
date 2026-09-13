@@ -16,6 +16,6 @@ public class TraerPedidoYFestival {
         System.out.printf("\n%s\n", pedido);
 
         FestivalABM fAbm = new FestivalABM();
-        System.out.printf("\nFestival donde se realizo el pedido: %s", fAbm.traerFestivalYUnidadDeVenta(1));
+        System.out.printf("\nFestival donde se realizo el pedido: %s", fAbm.traerFestivalPorNombre("Primavera Sound"));
     }
 }
