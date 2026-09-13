@@ -4,6 +4,7 @@ import datos.Festival;
 import datos.Plato;
 import datos.Staff;
 import datos.UnidadDeVenta;
+import negocio.CostoABM;
 import negocio.FestivalABM;
 import negocio.PlatoABM;
 import negocio.StaffABM;
@@ -18,17 +19,51 @@ public class Test {
         UnidadDeVentaABM abmUDV = new UnidadDeVentaABM();
         FestivalABM festivalABM = new FestivalABM();
         PlatoABM abmPlato = new PlatoABM();
+        CostoABM abmCosto = new CostoABM();
 
-        Festival festival = festivalABM.traerFestivalyCosto(1);
-
+        Festival festival_primavera = null, festival_verano = null, festival_otonio = null;
+        
+        
+        // ************* Inicio TEST Daira Mazza ************************
+        
+        //Agregar festival
+        try {
+        	festivalABM.agregar("Primavera Sound", "primavera", LocalDate.of(2026, 11, 10), LocalDate.of(2026, 11, 20));
+            festivalABM.agregar("Fiesta BA", "verano", LocalDate.of(2026, 12, 25), LocalDate.of(2026, 12, 29));
+            festivalABM.agregar("Lollapalooza", "otonio", LocalDate.of(2027, 03, 12), LocalDate.of(2027, 03, 14));
+            festivalABM.agregar("Lollapalooza", "otonio", LocalDate.of(2027, 03, 12), LocalDate.of(2027, 03, 14));
+		} catch (Exception e) {
+			System.out.println("******* Error en 'Agregar festival' *******\n " + e.getMessage());
+			System.out.println("\n");
+		}
+        
+        
+        //  Recuperar festivales y asignarles costo
+        try {
+        	festival_primavera = festivalABM.traerFestivalPorNombre("Primavera Sound");
+        	festival_verano = festivalABM.traerFestivalPorFechaInicioFin(LocalDate.of(2026, 12, 25), LocalDate.of(2026, 12, 29));
+        	festival_otonio = festivalABM.traerFestivalPorTemporadaNombreYFecha("otonio","Lollapalooza",LocalDate.of(2027, 3, 12), LocalDate.of(2027, 3, 14) );
+        	
+        	abmCosto.agregar(10, 12, 14, 16, festival_primavera);
+            abmCosto.agregar(11, 13, 15, 17, festival_verano );
+            abmCosto.agregar(32, 34, 36, 38, festival_otonio);
+         
+		} catch (Exception e) {
+			System.out.println("******* Error en 'Agregar costo' *******\n " + e.getMessage());
+			System.out.println("\n");
+		}
+        
+     // ************************ Fin TEST Daira Mazza ************************
+        
         ///Test para agregar unidades de venta (Lautaro Gonzalez)
         try {
-            abmUDV.agregarPuestoDes(true, "Kiddo's", 30, "PUESTO-001", festival, 2, 70.0f);
-            abmUDV.agregarFoodTruck(true, "Pancheria", 20, "PUESTO-002", festival, "ABC123", true);
+            abmUDV.agregarPuestoDes(true, "Kiddo's", 30, "PUESTO-001", festival_primavera, 2, 70.0f);
+            abmUDV.agregarFoodTruck(true, "Pancheria", 20, "PUESTO-002", festival_primavera, "ABC123", true);
             System.out.println("Unidades de venta agregadas correctamente.");
         } catch (Exception e) {
             System.out.println("Aviso unidades: " + e.getMessage());
         }
+       
 
         //InicioTest - Facundo D'Addese
         //Agrego cocineros y cajeros
@@ -66,6 +101,11 @@ public class Test {
         List<Staff> listaCajeros = abmUDV.traerCajerosDeFestivalPorTurnoYSueldo("Gourmet", "noche", 1000000);
         listaCajeros.forEach(System.out::println);
         // FinTest - Facundo D'Addese
+        
+        
+        
+       
+        
 
         //Test agregar Platos - Malena Lescano
 

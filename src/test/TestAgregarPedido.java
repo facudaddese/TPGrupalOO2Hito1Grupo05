@@ -17,7 +17,7 @@ public class TestAgregarPedido {
         int idUDV = 1;
         int idFest = 1;
         UnidadDeVenta udv = uAbm.traer(idUDV);
-        Festival fest = fAbm.traer(idFest);
+        Festival fest = fAbm.traerFestival(idFest);
 
         try {
             long ultimoId;

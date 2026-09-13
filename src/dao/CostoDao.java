@@ -9,6 +9,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import datos.Costo;
+import datos.Festival;
 
 public class CostoDao {
 
@@ -64,7 +65,7 @@ public class CostoDao {
 			session.close();
 		}
 	}
-	
+
 	//traer costo por id costo
 	public Costo traer(int idCosto) {
 		Costo objeto = null;
@@ -76,21 +77,36 @@ public class CostoDao {
 		}
 		return objeto;
 	}
-	
+
+	//traer costo por nombre festival
+	public Costo traerCostoPorFestival(String nombreFestival) {
+		Costo objeto = null;
+		try {
+			iniciaOperacion();
+			String hql = "from Costo c inner join fetch c.festival f where f.nombre = :nombreFestival";
+			objeto = (Costo) session.createQuery(hql)
+					.setParameter("nombreFestival", nombreFestival)
+					.uniqueResult();
+		} finally {
+			session.close();
+		}
+		return objeto;
+	}
+
 	//traer lista de costos por query
 	public List<Costo> traer(){
 		List <Costo> lista = new ArrayList<Costo>();
-		
+
 		try {
 			iniciaOperacion();
-			
+
 			Query<Costo> query = session.createQuery("from Costo c", Costo.class);
 			lista = query.getResultList();
-			
+
 		}finally{
 			session.close();
 		}
 		return lista;
-		
+
 	}
 }

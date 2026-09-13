@@ -1,5 +1,7 @@
 package datos;
 
+import java.util.Objects;
+
 public class Costo {
    
     private int id; //autoincremental
@@ -36,7 +38,7 @@ public class Costo {
 		return id;
 	}
 
-	public void setId(int id) {
+	protected void setId(int id) {
 		this.id = id;
 	}
 
@@ -87,5 +89,27 @@ public class Costo {
 		return "Costo [id=" + id + ", costoSuperficies=" + costoSuperficies + ", costoMontaje=" + costoMontaje
 				+ ", plusElectricidad=" + plusElectricidad + ", sueldoBase=" + sueldoBase + "]";
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(Integer.valueOf(costoMontaje), Integer.valueOf(costoSuperficies), festival,
+				Integer.valueOf(plusElectricidad), Integer.valueOf(sueldoBase));
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Costo other = (Costo) obj;
+		return costoMontaje == other.costoMontaje && costoSuperficies == other.costoSuperficies
+				&& Objects.equals(festival, other.festival) && plusElectricidad == other.plusElectricidad
+				&& sueldoBase == other.sueldoBase;
+	}
+	
+	
 
 }

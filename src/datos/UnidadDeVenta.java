@@ -1,6 +1,7 @@
 package datos;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 public class UnidadDeVenta {
@@ -127,8 +128,28 @@ public class UnidadDeVenta {
                 ", activo=" + activo +
                 '}';
     }
+	
+	
 
-    public boolean agregarStaff(Staff staff){
+    @Override
+	public int hashCode() {
+		return Objects.hash(codigo, nombreComercial, responsable);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		UnidadDeVenta other = (UnidadDeVenta) obj;
+		return Objects.equals(codigo, other.codigo) && Objects.equals(nombreComercial, other.nombreComercial)
+				&& Objects.equals(responsable, other.responsable);
+	}
+
+	public boolean agregarStaff(Staff staff){
         if(staff == null){
             return false;
         }

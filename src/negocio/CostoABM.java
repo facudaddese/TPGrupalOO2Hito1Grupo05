@@ -6,6 +6,7 @@ import dao.CostoDao;
 import datos.Costo;
 import datos.Festival;
 import datos.Staff;
+import test.TestTraerFestivalYCosto;
 
 public class CostoABM {
     CostoDao dao = new CostoDao();
@@ -18,7 +19,16 @@ public class CostoABM {
         return dao.traer();
     }
 
-    public int agregar(int costoSuperficies, int costoMontaje, int plusElectricidad, int sueldoBase, Festival festival) {
+    public int agregar(int costoSuperficies, int costoMontaje, int plusElectricidad, int sueldoBase, Festival festival) throws Exception {
+    	//validar que el costo no esté asignado a un festival
+    	if(festival == null) {
+    		throw new Exception("No se ha detectado un festival ");
+    	}
+    	Costo costoExiste = dao.traerCostoPorFestival(festival.getNombre());
+    	if(costoExiste != null) {
+    		throw new Exception("El festival ID " + festival.getId() + " ya tiene un costo asociado ");
+    	}
+    	
         Costo c = new Costo(costoSuperficies, costoMontaje, plusElectricidad, sueldoBase, festival);
         return dao.agregar(c);
     }
