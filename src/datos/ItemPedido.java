@@ -12,11 +12,11 @@ public class ItemPedido {
 
     public ItemPedido() {
     }
-    public ItemPedido(Plato plato, int cantidad, Pedido pedido, long precio) throws Exception {
+    public ItemPedido(Plato plato, int cantidad, Pedido pedido) throws Exception {
         this.plato = plato;
         setCantidad(cantidad);
         this.pedido = pedido;
-        this.precio = precio;
+        this.precio = plato.getPrecio();
     }
     public int getIdItemPedido() {
         return idItemPedido;

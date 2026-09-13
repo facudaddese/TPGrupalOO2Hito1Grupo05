@@ -16,8 +16,8 @@ public class ItemPedidoABM {
         return dao.traerIPyPlato(idItemPedido);
     }
 
-    public int agregar(Plato plato, int cantidad, Pedido pedido, long precio) throws Exception {
-        ItemPedido ip = new ItemPedido(plato, cantidad, pedido, precio);
+    public int agregar(Plato plato, int cantidad, Pedido pedido) throws Exception {
+        ItemPedido ip = new ItemPedido(plato, cantidad, pedido);
         return dao.agregar(ip);
     }
 

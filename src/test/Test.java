@@ -109,12 +109,15 @@ public class Test {
             System.out.println("Fallo inesperado: " + e.getMessage());
         }
 
-        //Test traer platos que contengan el texto pasado por parametro en el nombre
+        //Test traer platos que contengan el texto pasado por parametro en el nombre - Malena Lescano
+        System.out.println("Platos que contengan 'Mila' en su nombre:");
         List<Plato> platosConNombre = abmPlato.traerPlatosPorTexto("Mila");
         platosConNombre.forEach(System.out::println);
 
 
         //Ranking de platos mas vendidos de una unidad de venta especifica
+        //Ranking de platos mas vendidos de una unidad de venta especifica - Malena Lescano
+        System.out.println("Ranking de platos mas vendidos de" + udv.getNombreComercial() +":");
         List<Object[]> rankingDePlatos = abmPlato.traerRankingPlatosMasVendidosDeUnaUDV(udv);
         for (Object[] obj : rankingDePlatos) {
 
