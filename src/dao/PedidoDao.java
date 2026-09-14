@@ -2,10 +2,15 @@ package dao;
 
 import datos.ItemPedido;
 import datos.Pedido;
+import datos.UnidadDeVenta;
 import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PedidoDao {
     private static Session session;
@@ -109,6 +114,20 @@ public class PedidoDao {
             session.close();
         }
         return obj;
+    }
+
+    public List<Object[]> traerPedidosRealizadosEntreFechasDeUnaUDV(LocalDate inicio, LocalDate fin, UnidadDeVenta udv){
+        List<Object[]> pedidos = null;
+        try {
+            iniciaOperacion();
+            String hQL = "select p, ip from Pedido p inner join p.unidadDeVenta udv inner join p.listaItems ip where udv.codigo = :codigo and p.fechaTransaccion between :inicio and :fin";
+            pedidos = session.createQuery(hQL, Object[].class).setParameter("codigo", udv.getCodigo()).setParameter("inicio", inicio).setParameter("fin", fin).getResultList();
+        } finally {
+            session.close();
+        }
+
+        return pedidos;
+
     }
 
 

@@ -1,5 +1,6 @@
 package dao;
 
+import datos.Pedido;
 import datos.Plato;
 import datos.UnidadDeVenta;
 import org.hibernate.HibernateException;
@@ -125,6 +126,18 @@ public class PlatoDao {
             session.close();
         }
         return platos;
+    }
+
+    public Plato traerPlatoYUnidadDeVenta(String nombre) throws HibernateException {
+        Plato obj = null;
+        try {
+            iniciaOperacion();
+            String hQL = "from Plato p inner join fetch p.unidadDeVenta u where p.nombre= :nombre";
+            obj = (Plato) session.createQuery(hQL).setParameter("nombre", nombre).uniqueResult();
+        } finally {
+            session.close();
+        }
+        return obj;
     }
 
 }

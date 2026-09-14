@@ -26,6 +26,10 @@ public class PlatoABM {
         return dao.traerRankingPlatosMasVendidosDeUnaUDV(udv);
     }
 
+    public Plato traerPlatoYUnidadDeVenta(String nombre){
+        return dao.traerPlatoYUnidadDeVenta(nombre);
+    }
+
     public int agregar(String nombre, long precio, long costoProduccion, UnidadDeVenta udv) throws Exception {
         if (dao.existePlatoEnUnidad(nombre, udv)) {
             throw new Exception(
