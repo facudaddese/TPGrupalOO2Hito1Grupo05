@@ -1,14 +1,7 @@
 package test;
 
-import datos.Festival;
-import datos.Plato;
-import datos.Staff;
-import datos.UnidadDeVenta;
-import negocio.CostoABM;
-import negocio.FestivalABM;
-import negocio.PlatoABM;
-import negocio.StaffABM;
-import negocio.UnidadDeVentaABM;
+import datos.*;
+import negocio.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -135,10 +128,10 @@ public class Test {
         System.out.println("\n--- TEST: Agregar Pedidos e ItemPedido ---");
 
         //Test agregar Pedido - Malena Lescano
-        abmPedido.agregar(LocalDate.of(2026,9,1),udv,festival);
-        abmPedido.agregar(LocalDate.of(2026,9,4),udv,festival);
-        abmPedido.agregar(LocalDate.of(2026,9,11),udv,festival);
-        abmPedido.agregar(LocalDate.of(2026,9,10),udv,festival);
+        abmPedido.agregar(LocalDate.of(2026,9,1),udv,festival_primavera);
+        abmPedido.agregar(LocalDate.of(2026,9,4),udv,festival_primavera);
+        abmPedido.agregar(LocalDate.of(2026,9,11),udv,festival_primavera);
+        abmPedido.agregar(LocalDate.of(2026,9,10),udv,festival_primavera);
 
         //Test agregar ItemPedido - Malena Lescano
         abmItemPedido.agregar(abmPlato.traerPlatoYUnidadDeVenta("Milanesa Simple"),3,abmPedido.traerPedidoYUnidadDeVenta(1));
