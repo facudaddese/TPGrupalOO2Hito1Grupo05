@@ -293,4 +293,22 @@ public class UnidadDeVentaDao {
         }
         return lista;
     }
+
+    public List<UnidadDeVenta> traerPorRangoFechasFestival(LocalDate desde, LocalDate hasta){
+        List<UnidadDeVenta> lista = null;
+        try{
+            iniciaOperacion();
+            String hql = "select distinct u from UnidadDeVenta u "
+                        + "inner join fetch u.festival f "
+                        + "where f.fechaInicio >= :desde and f.fechaFin <= :hasta";
+            lista = session.createQuery(hql, UnidadDeVenta.class).setParameter("desde", desde).setParameter("hasta", hasta).list();
+        }catch (HibernateException he){
+            manejaExcepcion(he);
+        }finally {
+            session.close();
+        }
+        return lista;
+    }
+
+
 }

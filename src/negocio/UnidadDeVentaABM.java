@@ -115,4 +115,28 @@ public class UnidadDeVentaABM {
     public List<Staff> traerCajerosDeFestivalPorTurnoYSueldo(String nombreFestival, String turno, int sueldo) {
         return dao.traerCajerosDeFestivalPorTurnoYSueldo(nombreFestival, turno, sueldo);
     }
+
+    public boolean asignarResponsable(String codigoUnidad, Staff staff) throws Exception{
+        UnidadDeVenta unidad = dao.traerPorCodigo(codigoUnidad);
+        if(unidad == null){
+            throw  new Exception("ERROR: No existe unidad de venta con ese codigo");
+        }
+        if(staff == null){
+            throw new Exception("ERROR: El miembro del staff no existe");
+        }
+        unidad.setResponsable(staff);
+        dao.actualizar(unidad);
+        return true;
+    }
+
+    public List<UnidadDeVenta> traerPorRangoFechasFestival(LocalDate desde, LocalDate hasta) throws Exception{
+        if(desde == null || hasta == null){
+            throw new Exception("ERROR: Las fechas no pueden ser nulas");
+        }
+        if(desde.isAfter(hasta)){
+            throw new Exception("ERROR: La fecha 'desde' no puede ser posterior a la fecha 'hasta' ");
+        }
+        return dao.traerPorRangoFechasFestival(desde, hasta);
+    }
+
 }

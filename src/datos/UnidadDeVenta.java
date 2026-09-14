@@ -133,7 +133,7 @@ public class UnidadDeVenta {
 
     @Override
 	public int hashCode() {
-		return Objects.hash(codigo, nombreComercial, responsable);
+		return Objects.hash(codigo);
 	}
 
 	@Override
@@ -145,8 +145,7 @@ public class UnidadDeVenta {
 		if (getClass() != obj.getClass())
 			return false;
 		UnidadDeVenta other = (UnidadDeVenta) obj;
-		return Objects.equals(codigo, other.codigo) && Objects.equals(nombreComercial, other.nombreComercial)
-				&& Objects.equals(responsable, other.responsable);
+		return Objects.equals(codigo, other.codigo);
 	}
 
 	public boolean agregarStaff(Staff staff){
