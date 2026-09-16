@@ -54,6 +54,8 @@ public class Test {
         try {
             abmUDV.agregarPuestoDes(true, "Kiddo's", 30, "PUESTO-001", festival_primavera, 2, 70.0f);
             abmUDV.agregarFoodTruck(true, "Pancheria", 20, "PUESTO-002", festival_primavera, "ABC123", true);
+            abmUDV.agregarFoodTruck(true, "Beer & Drinks Van", 25, "PUESTO-004", festival_primavera, "XYZ789", false);
+            abmUDV.agregarPuestoDes(true, "La Parrilla de Don Julio", 50, "PUESTO-003", festival_verano, 3, 110.0f);
             System.out.println("Unidades de venta agregadas correctamente.");
         } catch (Exception e) {
             System.out.println("Aviso unidades: " + e.getMessage());
@@ -69,16 +71,42 @@ public class Test {
         abmStaff.agregarCajero("Adrian", "Martinez", 99761329, LocalDate.of(1992, 7, 7), LocalDate.of(2023, 12, 9), 900000, "noche");
 
         ///Asignamos Staff a unidades de venta (Lautaro Gonzalez)
-        Staff staff = abmStaff.traerPorDni(30111222);
-        Staff staff2 = abmStaff.traerPorDni(14852741);
+        Staff cocineroPerez = abmStaff.traerPorDni(30111222);
+        Staff cocineroDiaz = abmStaff.traerPorDni(14852741);
+        Staff cocineroSosa = abmStaff.traerPorDni(57951753);
+        Staff cajeraGomez = abmStaff.traerPorDni(28555111);
+        Staff cajeraSantos = abmStaff.traerPorDni(17481765);
+        Staff cajeroMartinez = abmStaff.traerPorDni(99761329);
 
         try {
             System.out.println("\n--- TEST: Asignacion de Staff ---");
-            abmUDV.asignarStaff("PUESTO-001", staff);
-            abmUDV.asignarStaff("PUESTO-002", staff2);
+            abmUDV.asignarStaff("PUESTO-001", cocineroPerez);
+            abmUDV.asignarStaff("PUESTO-001", cajeraGomez);
+
+            abmUDV.asignarStaff("PUESTO-002", cocineroDiaz);
+            abmUDV.asignarStaff("PUESTO-002", cajeraSantos);
+
+            abmUDV.asignarStaff("PUESTO-003", cocineroSosa);
+            abmUDV.asignarStaff("PUESTO-003", cajeroMartinez);
+
+            abmUDV.asignarStaff("PUESTO-004", cocineroDiaz);
             System.out.println("Personal asignado con éxito.");
         } catch (Exception e) {
             System.out.println("Fallo en asignación de staff: " + e.getMessage());
+        }
+
+        ///Asignamos responsables a las unidades de venta (Lautaro Gonzalez)
+        try{
+            System.out.println("\n---TEST: Asignacion de Responsables ---");
+            abmUDV.asignarResponsable("PUESTO-001", cocineroPerez);
+            abmUDV.asignarResponsable("PUESTO-002", cocineroDiaz);
+            abmUDV.asignarResponsable("PUESTO-003", cocineroSosa);
+            abmUDV.asignarResponsable("PUESTO-004", cajeroMartinez);
+
+            System.out.println("Responsables asignados con exito");
+
+        }catch (Exception e){
+            System.out.println("Fallo al asignar responsable: " + e.getMessage());
         }
 
 
