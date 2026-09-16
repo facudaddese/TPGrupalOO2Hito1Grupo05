@@ -11,6 +11,8 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import datos.Staff;
+import datos.Cocinero;
+import datos.Cajero;
 
 public class StaffDao {
 
@@ -88,6 +90,39 @@ public class StaffDao {
             session.close();
         }
         return objeto;
+    }
+
+    public List<Cajero> traerCajerosPorTurnoMayoresDeEdad(String turno) {
+        List<Cajero> lista = new ArrayList<>();
+        try {
+            iniciaOperacion();
+            LocalDate fechaLimite = LocalDate.now().minusYears(18);
+            Query<Cajero> query = session.createQuery(
+                    "from Cajero c where c.turno = :turno and c.fechaNacimiento <= :fechaLimite",
+                    Cajero.class);
+            query.setParameter("turno", turno);
+            query.setParameter("fechaLimite", fechaLimite);
+            lista = query.getResultList();
+        } finally {
+            session.close();
+        }
+        return lista;
+    }
+
+    public List<Cocinero> traerCocinerosPorEspecialidadYSueldo(String especialidad, int sueldoMinimo) {
+        List<Cocinero> lista = new ArrayList<>();
+        try {
+            iniciaOperacion();
+            Query<Cocinero> query = session.createQuery(
+                    "from Cocinero c where c.especialidadCulinaria = :especialidad and c.sueldo > :sueldoMinimo",
+                    Cocinero.class);
+            query.setParameter("especialidad", especialidad);
+            query.setParameter("sueldoMinimo", sueldoMinimo);
+            lista = query.getResultList();
+        } finally {
+            session.close();
+        }
+        return lista;
     }
 
     public List<Staff> traer() {

@@ -39,6 +39,14 @@ public class StaffABM {
         return dao.agregar(ca);
     }
 
+    public List<Cajero> traerCajerosPorTurnoMayoresDeEdad(String turno) {
+        return dao.traerCajerosPorTurnoMayoresDeEdad(turno);
+    }
+
+    public List<Cocinero> traerCocinerosPorEspecialidadYSueldo(String especialidad, int sueldoMinimo) {
+        return dao.traerCocinerosPorEspecialidadYSueldo(especialidad, sueldoMinimo);
+    }
+
     public void modificar(Staff s) throws Exception {
         Staff existe = dao.traerPorDni(s.getDni());
         if (existe != null && existe.getId() != s.getId()) {
