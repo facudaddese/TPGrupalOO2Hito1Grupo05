@@ -2,6 +2,9 @@ package negocio;
 
 import dao.PlatoDao;
 import datos.Plato;
+import datos.UnidadDeVenta;
+
+import java.util.List;
 
 public class PlatoABM {
 
@@ -11,8 +14,30 @@ public class PlatoABM {
         return dao.traer(idPlato);
     }
 
-    public int agregar(String nombre, long precio, long costoProduccion) throws Exception {
-        Plato p = new Plato(nombre, precio, costoProduccion);
+    public Plato traerPorNombre(String nombre){
+        return dao.traerPorNombre(nombre);
+    }
+
+    public List<Plato> traerPlatosPorTexto(String texto) {
+        return dao.traerPlatosPorTexto(texto);
+    }
+
+    public List<Plato> traerPlatosDeUnaUDVOrdenadosPorPrecio(UnidadDeVenta udv){
+        return dao.traerPlatosDeUnaUDVOrdenadosPorPrecio(udv);
+    }
+
+    public Plato traerPlatoYUnidadDeVenta(String nombre){
+        return dao.traerPlatoYUnidadDeVenta(nombre);
+    }
+
+    public int agregar(String nombre, long precio, long costoProduccion, UnidadDeVenta udv) throws Exception {
+        if (dao.existePlatoEnUnidad(nombre, udv)) {
+            throw new Exception(
+                    "Ya existe un plato con ese nombre en la unidad de venta"
+            );
+        }
+
+        Plato p = new Plato(nombre, precio, costoProduccion, udv);
         return dao.agregar(p);
     }
 

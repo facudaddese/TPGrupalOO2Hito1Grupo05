@@ -11,7 +11,7 @@
         <many-to-one name="responsable"
                      class="datos.Staff"
                      column="idStaffResponsable"
-                     not-null="true" />
+                     not-null="false" />
         <property name="superficie" column="superficie" type="integer" not-null="true"/>
         <property name="codigo" column="codigo" type="string" not-null="true"/>
         <set name='lstPlatos' lazy="true">
@@ -21,6 +21,10 @@
         <set name="lstStaff" lazy="true">
             <key column="idUnidadVenta"/>
             <one-to-many class="datos.Staff"/>
+        </set>
+        <set name="lstPedidos" lazy="true">
+            <key column="idUnidadDeVenta"/>
+            <one-to-many class="datos.Pedido"/>
         </set>
         <property name="activo" column="activo" type="boolean" not-null="true"/>
 

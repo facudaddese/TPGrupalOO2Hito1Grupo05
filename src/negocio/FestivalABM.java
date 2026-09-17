@@ -4,62 +4,95 @@ import java.time.LocalDate;
 import java.util.List;
 
 import dao.FestivalDao;
-import datos.Costo;
 import datos.Festival;
+import datos.UnidadDeVenta;
 
 public class FestivalABM {
-    FestivalDao dao = new FestivalDao();
+	FestivalDao dao = new FestivalDao();
 
-    public Festival traer(int idFestival) {
-        return dao.traer(idFestival);
-    }
+	public Festival traerFestival(int idFestival) {
+		return dao.traer(idFestival);
+	}
 
-    public List<Festival> traer() {
-        return dao.traer();
-    }
+	//  ***************** corrección : se agregan nuevos métodos de traer  *****************
+	public Festival traerFestivalPorNombre(String nombreFestival) {
+		return dao.traerPorNombre(nombreFestival);
+	}
 
-    public Festival traerFestivalyCosto(int idFestival) {
-        return dao.traerFestivalYCosto(idFestival);
-    }
+	public Festival traerFestivalPorTemporadaNombreYFecha(String temporada, String nombre, LocalDate fechaInicio, LocalDate fechaFin) {
+		return dao.traerFestivalPorTemporadaNombreYFecha(temporada, nombre, fechaInicio, fechaFin);
+	}
 
-    public int agregar(Festival f) throws Exception {
-        if (dao.traerPorNombre(f.getNombre()) != null) {
-            throw new Exception("ERROR: ya existe un festival con el mismo nombre " + f.getNombre());
-        }
-        return dao.agregar(f);
-    }
+	public Festival traerFestivalPorFechaInicioFin(LocalDate fechaInicio, LocalDate fechaFin) {
+		return dao.traerPorFechaInicioFin(fechaInicio, fechaFin);
+	}    
+	
+	//consultar si va acá o en UdV
+	public List<UnidadDeVenta> traerUnidadesDeVentasPorFestival(String nombre, String temporada, LocalDate fechaInicio, LocalDate fechaFin) {
+		return dao.traerUnidadesPorFestival(nombre, temporada, fechaInicio, fechaFin);
+	}
+	
+	public Long traercostoTotalPlatosPorFestival(String nombreFestival) {
+		return dao.costoTotalPlatosPorFestival(nombreFestival);
+	}
+	
+	public Double traerSueldoPromedioStaffDeFestival(String nombreFestival) {
+		return dao.sueldoPromedioStaffDeFestival(nombreFestival);
+	}
+	
+	
+	//  ***************** END corrección : se agregan nuevos métodos de traer  *****************
 
-    /*
-        public int agregar(String nombre, String temporada, LocalDate fechaInicio, LocalDate fechaFin, Costo costo) {
-            Festival f = new Festival(nombre, temporada, fechaInicio, fechaFin, costo);
-            //agregar versión sin costo o costo NULL
-            costo.setFestival(f);   // enlaza la referencia inversa: el foreign generator necesita costo.festival.id
-            return dao.agregar(f);
-        }
-        */
-    public int agregar(String nombre, String temporada, LocalDate fechaInicio, LocalDate fechaFin) {
-        Festival f = new Festival(nombre, temporada, fechaInicio, fechaFin);
-        //agregar versión sin costo o costo NULL
-        return dao.agregar(f);
-    }
 
-    public void modificar(Festival f) throws Exception {
-        Festival existe = dao.traer(f.getId());
-        if (existe == null) {
-            throw new Exception("ERROR:  no existe Festival con dicho ID " + f.getId());
-        }
-        dao.actualizar(f);
-    }
+	public List<Festival> traer() {
+		return dao.traer();
+	}
 
-    public void eliminar(int id) throws Exception {
-        Festival c = dao.traer(id);
-        if (c == null) {
-            throw new Exception("ERROR: no existe Festival con dicho ID");
-        }
-        dao.eliminar(c);
-    }
+	public Festival traerFestivalyCosto(int idFestival) {
+		return dao.traerFestivalYCosto(idFestival);
+	}
+	
+	public int agregar(String nombre, String temporada, LocalDate fechaInicio, LocalDate fechaFin) throws Exception {
+		Festival fExist = dao.traerFestivalPorTemporadaNombreYFecha(temporada, nombre, fechaInicio, fechaFin);
+		if (fExist != null) {
+			throw new Exception("Error: Se ha encontrado festival duplicado. ID: " + fExist.getId());
+		}
+		
 
-    public Festival traerFestivalYUnidadDeVenta(int idFestival) {
-        return dao.traerFestivalYUnidadDeVenta(idFestival);
-    }
+		Festival f = new Festival(nombre, temporada, fechaInicio, fechaFin);
+		return dao.agregar(f);
+	}
+
+	public void modificar(Festival f) throws Exception {
+		Festival existe = dao.traer(f.getId());
+		if (existe == null) {
+			throw new Exception("ERROR:  no existe Festival con dicho ID " + f.getId());
+		}
+		dao.actualizar(f);
+	}
+	
+	public void modificarFestivalPorNombre(String nombreOriginal, String nombreNuevo) throws Exception {
+		Festival existe = dao.traerPorNombre(nombreOriginal);
+		if (existe == null) {
+			throw new Exception("ERROR:  no existe Festival con nombre " + nombreOriginal);
+		}
+		existe.setNombre(nombreNuevo);
+		dao.actualizar(existe);
+	}
+	
+
+	
+
+	public void eliminar(int id) throws Exception {
+		Festival c = dao.traer(id);
+		if (c == null) {
+			throw new Exception("ERROR: no existe Festival con dicho ID");
+		}
+		dao.eliminar(c);
+	}
+
+	public Festival traerFestivalYUnidadDeVenta(String nombre) {
+		return dao.traerFestivalYUnidadDeVenta(nombre);
+	}
+	
 }

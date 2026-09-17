@@ -6,6 +6,7 @@ import datos.Pedido;
 import datos.UnidadDeVenta;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class PedidoABM {
     PedidoDao dao = new PedidoDao();
@@ -33,5 +34,12 @@ public class PedidoABM {
 
     public Pedido traerPedidoEitemPedido(int idPedido) {
         return dao.traerPedidoEitemPedido(idPedido);
+    }
+
+    public List<Pedido> traerPedidosRealizadosEntreFechasDeUnaUDV(LocalDate inicio, LocalDate fin, UnidadDeVenta udv){
+        return dao.traerPedidosRealizadosEntreFechasDeUnaUDV(inicio, fin, udv);
+    }
+    public List<Pedido> rankingPedidosMasCarosDeUnFestival(Festival festival){
+        return dao.rankingPedidosMasCarosDeUnFestival(festival);
     }
 }

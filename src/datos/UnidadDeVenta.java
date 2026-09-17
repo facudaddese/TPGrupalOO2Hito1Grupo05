@@ -1,6 +1,7 @@
 package datos;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 public class UnidadDeVenta {
@@ -12,6 +13,7 @@ public class UnidadDeVenta {
     private String codigo;
     private Set<Plato> lstPlatos;
     private Set<Staff> lstStaff;
+    private Set<Pedido> lstPedidos;
     private boolean activo;
     private Festival festival;  //1.9 DM:  se agrega relación 1 Festival - N Unidades de venta 
 
@@ -19,14 +21,15 @@ public class UnidadDeVenta {
 
     }
 
-    public UnidadDeVenta(boolean activo, String nombreComercial, int superficie, Set<Staff> lstStaff, Set<Plato> lstPlatos, String codigo, Staff responsable, Festival festival) {
+    public UnidadDeVenta(boolean activo, String nombreComercial, int superficie,  String codigo,  Festival festival) {
         this.activo = activo;
         this.nombreComercial = nombreComercial;
         this.superficie = superficie;
-        this.lstStaff = lstStaff;
-        this.lstPlatos = lstPlatos;
+        this.lstStaff = new HashSet<>();
+        this.lstPlatos = new HashSet<>();
+        this.lstPedidos = new HashSet<>();
         this.codigo = codigo;
-        this.responsable = responsable;
+        this.responsable = null;
         this.festival = festival;
     }
 
@@ -34,7 +37,7 @@ public class UnidadDeVenta {
         return id;
     }
 
-    public void setId(int id) {
+    protected void setId(int id) {
         this.id = id;
     }
 
@@ -82,6 +85,14 @@ public class UnidadDeVenta {
         return lstStaff;
     }
 
+    public Set<Pedido> getLstPedidos() {
+        return lstPedidos;
+    }
+
+    public void setLstPedidos(Set<Pedido> lstPedidos) {
+        this.lstPedidos = lstPedidos;
+    }
+
     public void setLstStaff(Set<Staff> lstStaff) {
         this.lstStaff = lstStaff;
     }
@@ -113,11 +124,31 @@ public class UnidadDeVenta {
                 ", codigo='" + codigo + '\'' +
                 ", lstPlatos=" + lstPlatos +
                 ", lstStaff=" + lstStaff +
+                ", lstPedidos=" + lstPedidos +
                 ", activo=" + activo +
                 '}';
     }
+	
+	
 
-    public boolean agregarStaff(Staff staff){
+    @Override
+	public int hashCode() {
+		return Objects.hash(codigo);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		UnidadDeVenta other = (UnidadDeVenta) obj;
+		return Objects.equals(codigo, other.codigo);
+	}
+
+	public boolean agregarStaff(Staff staff){
         if(staff == null){
             return false;
         }
@@ -149,6 +180,24 @@ public class UnidadDeVenta {
         }
 
         return this.lstPlatos.add(plato);
+
+    }
+
+    public boolean agregarPedido(Pedido pedido){
+
+        if(pedido == null){
+            return false;
+        }
+        if(this.lstPedidos==null){
+            this.lstPedidos = new HashSet<>();
+        }
+        for(Pedido p : this.lstPedidos){
+            if(p.getIdPedido() != 0 && p.getIdPedido() == pedido.getIdPedido()){
+                return false;
+            }
+        }
+
+        return this.lstPedidos.add(pedido);
 
     }
 
