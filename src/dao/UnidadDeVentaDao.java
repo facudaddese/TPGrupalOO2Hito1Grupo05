@@ -21,9 +21,7 @@ public class UnidadDeVentaDao {
     private static UnidadDeVentaDao instancia = null;
 
     protected UnidadDeVentaDao() {
-    }
-
-    ;
+    };
 
     public static UnidadDeVentaDao getInstance() {
         if (instancia == null) {
