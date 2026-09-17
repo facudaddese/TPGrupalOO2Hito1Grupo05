@@ -23,32 +23,32 @@ public class Test {
 
         //Agregar festival
         try {
-        	festivalABM.agregar("Primavera Sound", "primavera", LocalDate.of(2026, 11, 10), LocalDate.of(2026, 11, 20));
+            festivalABM.agregar("Primavera Sound", "primavera", LocalDate.of(2026, 11, 10), LocalDate.of(2026, 11, 20));
             festivalABM.agregar("Fiesta BA", "verano", LocalDate.of(2026, 12, 25), LocalDate.of(2026, 12, 29));
             festivalABM.agregar("Lollapalooza", "otonio", LocalDate.of(2027, 03, 12), LocalDate.of(2027, 03, 14));
             festivalABM.agregar("Lollapalooza", "otonio", LocalDate.of(2027, 03, 12), LocalDate.of(2027, 03, 14));
-		} catch (Exception e) {
-			System.out.println("******* Error en 'Agregar festival' *******\n " + e.getMessage());
-			System.out.println("\n");
-		}
+        } catch (Exception e) {
+            System.out.println("******* Error en 'Agregar festival' *******\n " + e.getMessage());
+            System.out.println("\n");
+        }
 
 
         //  Recuperar festivales y asignarles costo
         try {
-        	festival_primavera = festivalABM.traerFestivalPorNombre("Primavera Sound");
-        	festival_verano = festivalABM.traerFestivalPorFechaInicioFin(LocalDate.of(2026, 12, 25), LocalDate.of(2026, 12, 29));
-        	festival_otonio = festivalABM.traerFestivalPorTemporadaNombreYFecha("otonio","Lollapalooza",LocalDate.of(2027, 3, 12), LocalDate.of(2027, 3, 14) );
+            festival_primavera = festivalABM.traerFestivalPorNombre("Primavera Sound");
+            festival_verano = festivalABM.traerFestivalPorFechaInicioFin(LocalDate.of(2026, 12, 25), LocalDate.of(2026, 12, 29));
+            festival_otonio = festivalABM.traerFestivalPorTemporadaNombreYFecha("otonio", "Lollapalooza", LocalDate.of(2027, 3, 12), LocalDate.of(2027, 3, 14));
 
-        	abmCosto.agregar(10, 12, 14, 16, festival_primavera);
-            abmCosto.agregar(11, 13, 15, 17, festival_verano );
+            abmCosto.agregar(10, 12, 14, 16, festival_primavera);
+            abmCosto.agregar(11, 13, 15, 17, festival_verano);
             abmCosto.agregar(32, 34, 36, 38, festival_otonio);
 
-		} catch (Exception e) {
-			System.out.println("******* Error en 'Agregar costo' *******\n " + e.getMessage());
-			System.out.println("\n");
-		}
+        } catch (Exception e) {
+            System.out.println("******* Error en 'Agregar costo' *******\n " + e.getMessage());
+            System.out.println("\n");
+        }
 
-     // ************************ Fin TEST Daira Mazza ************************
+        // ************************ Fin TEST Daira Mazza ************************
 
         ///Test para agregar unidades de venta (Lautaro Gonzalez)
         try {
@@ -96,7 +96,7 @@ public class Test {
         }
 
         ///Asignamos responsables a las unidades de venta (Lautaro Gonzalez)
-        try{
+        try {
             System.out.println("\n---TEST: Asignacion de Responsables ---");
             abmUDV.asignarResponsable("PUESTO-001", cocineroPerez);
             abmUDV.asignarResponsable("PUESTO-002", cocineroDiaz);
@@ -105,7 +105,7 @@ public class Test {
 
             System.out.println("Responsables asignados con exito");
 
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Fallo al asignar responsable: " + e.getMessage());
         }
 
@@ -156,21 +156,21 @@ public class Test {
         System.out.println("\n--- TEST: Agregar Pedidos e ItemPedido ---");
 
         //Test agregar Pedido - Malena Lescano
-        abmPedido.agregar(LocalDate.of(2026,9,1),udv,festival_primavera);
-        abmPedido.agregar(LocalDate.of(2026,9,4),udv,festival_primavera);
-        abmPedido.agregar(LocalDate.of(2026,9,11),udv2,festival_primavera);
-        abmPedido.agregar(LocalDate.of(2026,9,10),udv,festival_primavera);
+        abmPedido.agregar(LocalDate.of(2026, 9, 1), udv, festival_primavera);
+        abmPedido.agregar(LocalDate.of(2026, 9, 4), udv, festival_primavera);
+        abmPedido.agregar(LocalDate.of(2026, 9, 11), udv2, festival_primavera);
+        abmPedido.agregar(LocalDate.of(2026, 9, 10), udv, festival_primavera);
 
         //Test agregar ItemPedido - Malena Lescano
-        abmItemPedido.agregar(abmPlato.traerPlatoYUnidadDeVenta("Milanesa Simple"),3,abmPedido.traerPedidoYUnidadDeVenta(1));
-        abmItemPedido.agregar(abmPlato.traerPlatoYUnidadDeVenta("Sorrentinos"),1,abmPedido.traerPedidoYUnidadDeVenta(1));
-        abmItemPedido.agregar(abmPlato.traerPlatoYUnidadDeVenta("Milanesa A Caballo"),2,abmPedido.traerPedidoYUnidadDeVenta(2));
-        abmItemPedido.agregar(abmPlato.traerPlatoYUnidadDeVenta("Milanesa A Caballo"),1,abmPedido.traerPedidoYUnidadDeVenta(4));
-        abmItemPedido.agregar(abmPlato.traerPlatoYUnidadDeVenta("Hamburguesa Doble"),4,abmPedido.traerPedidoYUnidadDeVenta(3));
+        abmItemPedido.agregar(abmPlato.traerPlatoYUnidadDeVenta("Milanesa Simple"), 3, abmPedido.traerPedidoYUnidadDeVenta(1));
+        abmItemPedido.agregar(abmPlato.traerPlatoYUnidadDeVenta("Sorrentinos"), 1, abmPedido.traerPedidoYUnidadDeVenta(1));
+        abmItemPedido.agregar(abmPlato.traerPlatoYUnidadDeVenta("Milanesa A Caballo"), 2, abmPedido.traerPedidoYUnidadDeVenta(2));
+        abmItemPedido.agregar(abmPlato.traerPlatoYUnidadDeVenta("Milanesa A Caballo"), 1, abmPedido.traerPedidoYUnidadDeVenta(4));
+        abmItemPedido.agregar(abmPlato.traerPlatoYUnidadDeVenta("Hamburguesa Doble"), 4, abmPedido.traerPedidoYUnidadDeVenta(3));
 
         try {
             //Caso de excepcion, este plato no pertenece a udv, pertenece a udv2
-            abmItemPedido.agregar(abmPlato.traerPlatoYUnidadDeVenta("Pizza Especial"),1,abmPedido.traerPedidoYUnidadDeVenta(1));
+            abmItemPedido.agregar(abmPlato.traerPlatoYUnidadDeVenta("Pizza Especial"), 1, abmPedido.traerPedidoYUnidadDeVenta(1));
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -190,51 +190,6 @@ public class Test {
             System.out.println("Fallo inesperado: " + e.getMessage());
         }
 
-        //Test traer platos que contengan el texto pasado por parametro en el nombre - Malena Lescano
-        System.out.println("\n--- TEST: Traer Platos ---");
-        System.out.println("\nPlatos que contengan 'Mila' en su nombre:");
-        List<Plato> platosConNombre = abmPlato.traerPlatosPorTexto("Mila");
-        platosConNombre.forEach(System.out::println);
-
-
-        //Ranking de platos mas vendidos de una unidad de venta especifica - Malena Lescano
-        System.out.println("\nRanking de platos mas vendidos de " + udv.getNombreComercial() +":");
-        List<Object[]> rankingDePlatos = abmPlato.traerRankingPlatosMasVendidosDeUnaUDV(udv);
-        for (Object[] obj : rankingDePlatos) {
-
-            Plato plato = (Plato) obj[0];
-            Long cantidad = (Long) obj[1];
-
-            System.out.println(plato.getNombre() + " - " + cantidad + " total de unidades vendidas");
-        }
-
-        //Test traer pedidos realizados entre rango de fechas de una UDV especifica - Malena Lescano
-        System.out.println("\n--- TEST: Traer Pedidos ---");
-        LocalDate inicio = LocalDate.of(2026,9,1);
-        LocalDate fin = LocalDate.of(2026,9,10);
-        System.out.println("\nPedidos entre " + inicio + " y " + fin + " de " + udv.getNombreComercial());
-
-        List<Object[]> resultados = abmPedido.traerPedidosRealizadosEntreFechasDeUnaUDV(inicio, fin, udv);
-
-        for (Object[] fila : resultados) {
-            Pedido p = (Pedido) fila[0];
-            ItemPedido ip = (ItemPedido) fila[1];
-
-            System.out.println("=================================================");
-            System.out.println("Pedido ID: " + p.getIdPedido() + " | Fecha: " + p.getFechaTransaccion());
-            System.out.println("  -> Plato: " + abmPlato.traer(ip.getPlato().getIdPlato()) + ", cantidad: " + ip.getCantidad());
-        }
-
-        List<Object[]> ranking = abmPedido.rankingPedidosMasCarosDeUnFestival(festival_primavera);
-        System.out.println("\nRanking Pedidos Mas Caros De " + festival_primavera.getNombre() + ":");
-        for (Object[] fila  : ranking) {
-            Pedido p = (Pedido) fila[0];
-            Long total = (Long) fila[1];
-
-            System.out.println("> id: " + p.getIdPedido() + " - " + p.getFechaTransaccion());
-            System.out.println("total ---> " + total);
-
-        }
 
     }
 }
