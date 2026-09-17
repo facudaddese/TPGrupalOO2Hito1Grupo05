@@ -116,12 +116,13 @@ public class PlatoDao {
         return platos;
     }
 
-    public List<Object[]> traerRankingPlatosMasVendidosDeUnaUDV( UnidadDeVenta udv) {
-        List<Object[]>  platos = null;
+    public List<Plato> traerPlatosDeUnaUDVOrdenadosPorPrecio(UnidadDeVenta udv) {
+        List<Plato> platos = null;
+
         try {
             iniciaOperacion();
-            String hql = "select p, sum(i.cantidad) from Plato p inner join p.listaItems i where p.unidadDeVenta=:udv group by p order by sum(i.cantidad) desc";
-            platos = session.createQuery(hql, Object[].class).setParameter("udv", udv).setMaxResults(3).getResultList();
+            String hql = "from Plato p where p.unidadDeVenta=:udv order by p.precio desc";
+            platos = session.createQuery(hql, Plato.class).setParameter("udv", udv).getResultList();
         } finally {
             session.close();
         }
