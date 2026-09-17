@@ -39,4 +39,7 @@ public class PedidoABM {
     public List<Object[]> traerPedidosRealizadosEntreFechasDeUnaUDV(LocalDate inicio, LocalDate fin, UnidadDeVenta udv){
         return dao.traerPedidosRealizadosEntreFechasDeUnaUDV(inicio, fin, udv);
     }
+    public List<Object[]> rankingPedidosMasCarosDeUnFestival(Festival festival){
+        return dao.rankingPedidosMasCarosDeUnFestival(festival);
+    }
 }

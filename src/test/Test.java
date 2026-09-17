@@ -158,7 +158,7 @@ public class Test {
         //Test agregar Pedido - Malena Lescano
         abmPedido.agregar(LocalDate.of(2026,9,1),udv,festival_primavera);
         abmPedido.agregar(LocalDate.of(2026,9,4),udv,festival_primavera);
-        abmPedido.agregar(LocalDate.of(2026,9,11),udv,festival_primavera);
+        abmPedido.agregar(LocalDate.of(2026,9,11),udv2,festival_primavera);
         abmPedido.agregar(LocalDate.of(2026,9,10),udv,festival_primavera);
 
         //Test agregar ItemPedido - Malena Lescano
@@ -166,6 +166,7 @@ public class Test {
         abmItemPedido.agregar(abmPlato.traerPlatoYUnidadDeVenta("Sorrentinos"),1,abmPedido.traerPedidoYUnidadDeVenta(1));
         abmItemPedido.agregar(abmPlato.traerPlatoYUnidadDeVenta("Milanesa A Caballo"),2,abmPedido.traerPedidoYUnidadDeVenta(2));
         abmItemPedido.agregar(abmPlato.traerPlatoYUnidadDeVenta("Milanesa A Caballo"),1,abmPedido.traerPedidoYUnidadDeVenta(4));
+        abmItemPedido.agregar(abmPlato.traerPlatoYUnidadDeVenta("Hamburguesa Doble"),4,abmPedido.traerPedidoYUnidadDeVenta(3));
 
         try {
             //Caso de excepcion, este plato no pertenece a udv, pertenece a udv2
@@ -224,7 +225,16 @@ public class Test {
             System.out.println("  -> Plato: " + abmPlato.traer(ip.getPlato().getIdPlato()) + ", cantidad: " + ip.getCantidad());
         }
 
+        List<Object[]> ranking = abmPedido.rankingPedidosMasCarosDeUnFestival(festival_primavera);
+        System.out.println("\nRanking Pedidos Mas Caros De " + festival_primavera.getNombre() + ":");
+        for (Object[] fila  : ranking) {
+            Pedido p = (Pedido) fila[0];
+            Long total = (Long) fila[1];
 
+            System.out.println("> id: " + p.getIdPedido() + " - " + p.getFechaTransaccion());
+            System.out.println("total ---> " + total);
+
+        }
 
     }
 }

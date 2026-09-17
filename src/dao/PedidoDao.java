@@ -1,6 +1,7 @@
 package dao;
 
-import datos.ItemPedido;
+import datos.Festival;
+
 import datos.Pedido;
 import datos.UnidadDeVenta;
 import org.hibernate.Hibernate;
@@ -9,7 +10,6 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 public class PedidoDao {
@@ -128,6 +128,20 @@ public class PedidoDao {
 
         return pedidos;
 
+    }
+
+    public List<Object[]> rankingPedidosMasCarosDeUnFestival(Festival festival){
+        List<Object[]> pedidos = null;
+        try {
+            iniciaOperacion();
+            String hQL = "select p, sum(ip.precio * ip.cantidad) from Pedido p inner join p.listaItems ip where p.festival = :festival group by p order by sum(ip.precio * ip.cantidad) desc";
+            pedidos = session.createQuery(hQL, Object[].class).setParameter("festival", festival).setMaxResults(3).getResultList();
+
+        } finally {
+            session.close();
+        }
+
+        return pedidos;
     }
 
 
