@@ -21,9 +21,7 @@ public class UnidadDeVentaDao {
     private static UnidadDeVentaDao instancia = null;
 
     protected UnidadDeVentaDao() {
-    }
-
-    ;
+    };
 
     public static UnidadDeVentaDao getInstance() {
         if (instancia == null) {
@@ -97,8 +95,8 @@ public class UnidadDeVentaDao {
         UnidadDeVenta objeto = null;
         try {
             iniciaOperacion();
-            String hql = "from UnidadDeVenta u left join fetch u.responsable where u.codigo = :codigo";
-            objeto = session.createQuery(hql, UnidadDeVenta.class).setParameter("codigo", codigo).uniqueResult();
+            objeto = (UnidadDeVenta) session.createQuery(
+                    "from UnidadDeVenta u where u.codigo = :codigo").setParameter("codigo", codigo).uniqueResult();
         } catch (HibernateException he) {
             manejaExcepcion(he);
         } finally {
@@ -187,68 +185,7 @@ public class UnidadDeVentaDao {
         return objeto;
     }
 
-    public UnidadDeVenta traerPorCodigoYPlato(String codigo){
-        UnidadDeVenta objeto = null;
-        try{
-            iniciaOperacion();
-            objeto = (UnidadDeVenta) session.createQuery("from UnidadDeVenta u where u.codigo = :codigo")
-                    .setParameter("codigo", codigo)
-                    .uniqueResult();
-            if(objeto != null){
-                Hibernate.initialize(objeto.getLstPlatos());
-            }
-        }catch (HibernateException he){
-            manejaExcepcion(he);
-        }finally {
-            session.close();
-        }
-
-        return objeto;
-
-    }
-
-    public UnidadDeVenta traerPorCodigoYStaff(String codigo){
-        UnidadDeVenta objeto = null;
-        try {
-            iniciaOperacion();
-            objeto = (UnidadDeVenta) session.createQuery("from UnidadDeVenta u where u.codigo = :codigo")
-                    .setParameter("codigo", codigo)
-                    .uniqueResult();
-            if(objeto != null){
-                Hibernate.initialize(objeto.getResponsable());
-                Hibernate.initialize(objeto.getLstStaff());
-            }
-        }catch (HibernateException he){
-            manejaExcepcion(he);
-        }finally {
-            session.close();
-        }
-
-        return objeto;
-
-    }
-
-    public UnidadDeVenta traerPorCodigoYPedidos(String codigo){
-        UnidadDeVenta objeto = null;
-        try {
-            iniciaOperacion();
-            objeto = (UnidadDeVenta) session.createQuery("from UnidadDeVenta u where u.codigo = :codigo")
-                    .setParameter("codigo", codigo)
-                    .uniqueResult();
-            if(objeto != null){
-                Hibernate.initialize(objeto.getLstPedidos());
-            }
-        }catch (HibernateException he){
-            manejaExcepcion(he);
-        }finally {
-            session.close();
-        }
-
-        return objeto;
-
-    }
-
-    public List<Staff> traerCocinerosDeFestivalEntre(String nombreFestival, LocalDate fechaDesde, LocalDate fechaHasta) {
+    public List<Staff> traerCocinerosDeFestivalEntreFechaDeNac(String nombreFestival, LocalDate fechaDesde, LocalDate fechaHasta) {
         List<Staff> lista = new ArrayList<>();
         try {
             iniciaOperacion();
@@ -294,63 +231,4 @@ public class UnidadDeVentaDao {
         }
         return lista;
     }
-
-    public List<UnidadDeVenta> traerPorRangoFechasFestival(LocalDate desde, LocalDate hasta){
-        List<UnidadDeVenta> lista = null;
-        try{
-            iniciaOperacion();
-            String hql = "select distinct u from UnidadDeVenta u "
-                        + "inner join fetch u.festival f "
-                        + "where f.fechaInicio >= :desde and f.fechaFin <= :hasta";
-            lista = session.createQuery(hql, UnidadDeVenta.class).setParameter("desde", desde).setParameter("hasta", hasta).list();
-        }catch (HibernateException he){
-            manejaExcepcion(he);
-        }finally {
-            session.close();
-        }
-        return lista;
-    }
-
-    public List<Object[]> traerUnidadesConVentasSuperioresA(double montoObjetivo){
-        List<Object[]> lista = null;
-
-        try{
-            iniciaOperacion();
-            String hql = "select u, sum(ip.cantidad * pl.precio) "
-                        + "from ItemPedido ip "
-                        + "inner join ip.pedido p "
-                        + "inner join p.unidadDeVenta u "
-                        + "inner join ip.plato pl "
-                        + "group by u "
-                        + "having sum(ip.cantidad * pl.precio) >= :monto "
-                        + "order by sum(ip.cantidad * pl.precio) desc";
-            lista = session.createQuery(hql, Object[].class).setParameter("monto", (long) montoObjetivo).list();
-        }catch(HibernateException he){
-            manejaExcepcion(he);
-        }finally {
-            session.close();
-        }
-        return lista;
-
-    }
-
-    public void desvincularStaff(UnidadDeVenta unidad, Staff staff){
-        try{
-            iniciaOperacion();
-            UnidadDeVenta u = session.get(UnidadDeVenta.class, unidad.getId());
-            Staff s = session.get(Staff.class, staff.getId());
-
-            if(u != null && s != null){
-                u.getLstStaff().remove(s);
-                session.update(u);
-            }
-            tx.commit();
-        }catch (HibernateException he){
-            manejaExcepcion(he);
-        }finally {
-            session.close();
-        }
-    }
-
-
 }
