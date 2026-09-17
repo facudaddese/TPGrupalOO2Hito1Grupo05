@@ -22,8 +22,8 @@ public class PlatoABM {
         return dao.traerPlatosPorTexto(texto);
     }
 
-    public List<Object[]> traerRankingPlatosMasVendidosDeUnaUDV( UnidadDeVenta udv){
-        return dao.traerRankingPlatosMasVendidosDeUnaUDV(udv);
+    public List<Plato> traerPlatosDeUnaUDVOrdenadosPorPrecio(UnidadDeVenta udv){
+        return dao.traerPlatosDeUnaUDVOrdenadosPorPrecio(udv);
     }
 
     public Plato traerPlatoYUnidadDeVenta(String nombre){
