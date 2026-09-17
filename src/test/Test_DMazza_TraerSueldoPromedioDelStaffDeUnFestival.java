@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 import negocio.FestivalABM;
 
-public class Test_DM_TraerSueldoPromedioDelStaffDeUnFestival {
+public class Test_DMazza_TraerSueldoPromedioDelStaffDeUnFestival {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
