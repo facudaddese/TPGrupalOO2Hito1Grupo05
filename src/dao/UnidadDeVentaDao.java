@@ -97,8 +97,8 @@ public class UnidadDeVentaDao {
         UnidadDeVenta objeto = null;
         try {
             iniciaOperacion();
-            objeto = (UnidadDeVenta) session.createQuery(
-                    "from UnidadDeVenta u where u.codigo = :codigo").setParameter("codigo", codigo).uniqueResult();
+            String hql = "from UnidadDeVenta u left join fetch u.responsable where u.codigo = :codigo";
+            objeto = session.createQuery(hql, UnidadDeVenta.class).setParameter("codigo", codigo).uniqueResult();
         } catch (HibernateException he) {
             manejaExcepcion(he);
         } finally {
@@ -215,6 +215,7 @@ public class UnidadDeVentaDao {
                     .setParameter("codigo", codigo)
                     .uniqueResult();
             if(objeto != null){
+                Hibernate.initialize(objeto.getResponsable());
                 Hibernate.initialize(objeto.getLstStaff());
             }
         }catch (HibernateException he){
@@ -331,6 +332,24 @@ public class UnidadDeVentaDao {
         }
         return lista;
 
+    }
+
+    public void desvincularStaff(UnidadDeVenta unidad, Staff staff){
+        try{
+            iniciaOperacion();
+            UnidadDeVenta u = session.get(UnidadDeVenta.class, unidad.getId());
+            Staff s = session.get(Staff.class, staff.getId());
+
+            if(u != null && s != null){
+                u.getLstStaff().remove(s);
+                session.update(u);
+            }
+            tx.commit();
+        }catch (HibernateException he){
+            manejaExcepcion(he);
+        }finally {
+            session.close();
+        }
     }
 
 

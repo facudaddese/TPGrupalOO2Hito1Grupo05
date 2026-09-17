@@ -14,6 +14,8 @@ public class UnidadDeVentaABM {
         return dao.traer(id);
     }
 
+    public UnidadDeVenta traerPorCodigo(String codigoUDV){return dao.traerPorCodigo(codigoUDV);}
+
     public int agregarPuestoDes(boolean activo, String nombreComercial, int superficie, String codigo, Festival festival, int cantidadCarpas, float tiempoMontaje) throws Exception {
 
         if(festival == null){
@@ -144,6 +146,53 @@ public class UnidadDeVentaABM {
             throw new Exception("ERROR: El monto objetivo no puede ser menor que cero");
         }
         return dao.traerUnidadesConVentasSuperioresA(montoObjetivo);
+    }
+
+    public void cambiarResponsable(String codigoUDV, Staff nuevoResponsable)throws Exception{
+        if(codigoUDV == null || codigoUDV.trim().isEmpty()){
+            throw new Exception("ERROR: El codigo de la unidad de venta no puede estar vacio");
+        }
+        if(nuevoResponsable == null){
+            throw new Exception("ERROR: Debe especificar un nuevo responsable valido");
+        }
+
+        UnidadDeVenta u = dao.traerPorCodigo(codigoUDV);
+        if(u == null){
+            throw new Exception("ERROR: No existe la unidad de venta con el codigo especificado");
+        }
+
+        if(u.getResponsable() != null && u.getResponsable().getDni() == nuevoResponsable.getDni()){
+            throw new Exception("ERROR: El empleado especificado ya existe como responsable actual de esta unidad");
+        }
+
+        u.setResponsable(nuevoResponsable);
+        dao.actualizar(u);
+
+    }
+
+    public UnidadDeVenta traerPorCodigoYStaff(String codigo) throws Exception {
+        if (codigo == null || codigo.trim().isEmpty()) {
+            throw new Exception("ERROR: El código de la unidad de venta no puede estar vacío.");
+        }
+        return dao.traerPorCodigoYStaff(codigo);
+    }
+
+    public void desvincularStaff(String codigoUDV, Staff staff)throws Exception{
+        if(codigoUDV == null || codigoUDV.trim().isEmpty()){
+            throw new Exception("ERROR: El codigo de la unidad de venta no puede estar vacio");
+        }
+        if(staff == null){
+            throw new Exception("ERROR: El Staff no puede ser nulo");
+        }
+        UnidadDeVenta u = dao.traerPorCodigoYStaff(codigoUDV);
+        if(u == null){
+            throw new Exception("ERROR: No existe una unidad asociada ese codigo");
+        }
+        if(u.getResponsable() != null && u.getResponsable().getDni() == staff.getDni()){
+            throw new Exception("ERROR: No se puede desvincular al empleado porque es el responsable");
+        }
+
+        dao.desvincularStaff(u, staff);
     }
 
 }
