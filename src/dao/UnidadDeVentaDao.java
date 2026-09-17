@@ -187,7 +187,7 @@ public class UnidadDeVentaDao {
         return objeto;
     }
 
-    public List<Staff> traerCocinerosDeFestivalEntre(String nombreFestival, LocalDate fechaDesde, LocalDate fechaHasta) {
+    public List<Staff> traerCocinerosDeFestivalEntreFechaDeNac(String nombreFestival, LocalDate fechaDesde, LocalDate fechaHasta) {
         List<Staff> lista = new ArrayList<>();
         try {
             iniciaOperacion();
