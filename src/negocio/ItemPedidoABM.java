@@ -17,6 +17,10 @@ public class ItemPedidoABM {
     }
 
     public int agregar(Plato plato, int cantidad, Pedido pedido) throws Exception {
+        if (!plato.getUnidadDeVenta().equals(pedido.getUnidadDeVenta())) {
+            throw new Exception("El plato no pertenece a la Unidad de venta a la que se asigno el pedido");
+        }
+
         ItemPedido ip = new ItemPedido(plato, cantidad, pedido);
         return dao.agregar(ip);
     }

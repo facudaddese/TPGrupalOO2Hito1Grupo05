@@ -12,5 +12,12 @@
         <property name="precio" column="precio" type="long" not-null="true"/>
         <property name="costoProduccion" column="costo_produccion" type="long" not-null="true"/>
 
+        <many-to-one name="unidadDeVenta" class="datos.UnidadDeVenta" column="idUnidadDeVenta" not-null="true"/>
+
+        <set name="listaItems" table="Item_pedido" order-by="idItemPedido asc" inverse="true" lazy="true" fetch="select">
+            <key column="idPlato" not-null="true"  />
+            <one-to-many class="datos.ItemPedido" />
+        </set>
+
     </class>
 </hibernate-mapping>

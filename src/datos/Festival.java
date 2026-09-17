@@ -37,7 +37,7 @@ public class Festival {
 		return id;
 	}
 
-	public void setId(int id) {
+	protected void setId(int id) {
 		this.id = id;
 	}
 
@@ -88,11 +88,13 @@ public class Festival {
 	public void setCosto(Costo costo) {
 		this.costo = costo;
 	}
-
+	
+	// se eliminan listas / clases en to string (costo)
+	
 	@Override
 	public String toString() {
 		return "Festival [id=" + id + ", nombre=" + nombre + ", temporada=" + temporada + ", fechaInicio=" + fechaInicio
-				+ ", fechaFin=" + fechaFin + ", costo=" + costo + "]";
+				+ ", fechaFin=" + fechaFin + "]";
 	}
 
 	@Override
@@ -109,10 +111,11 @@ public class Festival {
 		if (getClass() != obj.getClass())
 			return false;
 		Festival other = (Festival) obj;
-		return Objects.equals(costo, other.costo) && Objects.equals(fechaFin, other.fechaFin)
-				&& Objects.equals(fechaInicio, other.fechaInicio) && id == other.id
-				&& Objects.equals(nombre, other.nombre) && Objects.equals(temporada, other.temporada)
-				&& Objects.equals(unidadesDeVenta, other.unidadesDeVenta);
+		
+		//Valida fechas inicio / fin, nombre de festival y temporada
+		
+		return  Objects.equals(fechaFin, other.fechaFin) && Objects.equals(fechaInicio, other.fechaInicio)
+				&& Objects.equals(nombre, other.nombre) && Objects.equals(temporada, other.temporada);
 	};
 
 }

@@ -1,11 +1,14 @@
 package datos;
 
+import java.util.Objects;
+
 public class ItemPedido {
 
     private int idItemPedido;
     private Plato plato;
     private int cantidad;
     private Pedido pedido;
+    private long precio;
 
     public ItemPedido() {
     }
@@ -13,19 +16,22 @@ public class ItemPedido {
         this.plato = plato;
         setCantidad(cantidad);
         this.pedido = pedido;
+        this.precio = plato.getPrecio();
     }
     public int getIdItemPedido() {
         return idItemPedido;
     }
-    public void setIdItemPedido(int idItemPedido) {
+    protected void setIdItemPedido(int idItemPedido) {
         this.idItemPedido = idItemPedido;
     }
+
     public Plato getPlato() {
         return plato;
     }
     public void setPlato(Plato plato) {
         this.plato = plato;
     }
+
     public int getCantidad() {
         return cantidad;
     }
@@ -44,11 +50,35 @@ public class ItemPedido {
         this.pedido = pedido;
     }
 
+    public long getPrecio() {
+        return precio;
+    }
+    public void setPrecio(long precio) {
+        this.precio = precio;
+    }
+
     @Override
     public String toString() {
         return "ItemPedido{" +
                 "idItemPedido=" + idItemPedido +
                 ", cantidad=" + cantidad +
                 '}';
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        ItemPedido that = (ItemPedido) o;
+        return getIdItemPedido() == that.getIdItemPedido() && getCantidad() == that.getCantidad() && getPrecio() == that.getPrecio();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getIdItemPedido(), getCantidad(), getPrecio());
+    }
+
+    public long getSubtotal() {
+        return cantidad * precio;
     }
 }
