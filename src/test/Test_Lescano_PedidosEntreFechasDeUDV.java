@@ -1,10 +1,9 @@
 package test;
 
-import datos.ItemPedido;
+
 import datos.Pedido;
 import datos.UnidadDeVenta;
 import negocio.PedidoABM;
-import negocio.PlatoABM;
 import negocio.UnidadDeVentaABM;
 
 import java.time.LocalDate;
@@ -14,7 +13,6 @@ public class Test_Lescano_PedidosEntreFechasDeUDV {
     static void main(String[] args) {
 
         PedidoABM abmPedido = new PedidoABM();
-        PlatoABM abmPlato = new PlatoABM();
         UnidadDeVentaABM abmUDV = new UnidadDeVentaABM();
         UnidadDeVenta udv = abmUDV.traer(1);
 
@@ -24,15 +22,13 @@ public class Test_Lescano_PedidosEntreFechasDeUDV {
         LocalDate fin = LocalDate.of(2026,9,10);
         System.out.println("\nPedidos entre " + inicio + " y " + fin + " de " + udv.getNombreComercial());
 
-        List<Object[]> resultados = abmPedido.traerPedidosRealizadosEntreFechasDeUnaUDV(inicio, fin, udv);
+        List<Pedido> resultados = abmPedido.traerPedidosRealizadosEntreFechasDeUnaUDV(inicio, fin, udv);
 
-        for (Object[] fila : resultados) {
-            Pedido p = (Pedido) fila[0];
-            ItemPedido ip = (ItemPedido) fila[1];
-
+        for (Pedido p : resultados) {
             System.out.println("=================================================");
             System.out.println("Pedido ID: " + p.getIdPedido() + " | Fecha: " + p.getFechaTransaccion());
-            System.out.println("  -> Plato: " + abmPlato.traer(ip.getPlato().getIdPlato()) + ", cantidad: " + ip.getCantidad());
+
+
         }
     }
 }

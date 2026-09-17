@@ -2,6 +2,7 @@ package dao;
 
 import datos.Festival;
 
+import datos.ItemPedido;
 import datos.Pedido;
 import datos.UnidadDeVenta;
 import org.hibernate.Hibernate;
@@ -116,31 +117,38 @@ public class PedidoDao {
         return obj;
     }
 
-    public List<Object[]> traerPedidosRealizadosEntreFechasDeUnaUDV(LocalDate inicio, LocalDate fin, UnidadDeVenta udv){
-        List<Object[]> pedidos = null;
+    public List<Pedido> traerPedidosRealizadosEntreFechasDeUnaUDV(LocalDate inicio, LocalDate fin, UnidadDeVenta udv){
+        List<Pedido> pedidos = null;
         try {
             iniciaOperacion();
-            String hQL = "select p, ip from Pedido p inner join p.unidadDeVenta udv inner join p.listaItems ip where udv.codigo = :codigo and p.fechaTransaccion between :inicio and :fin";
-            pedidos = session.createQuery(hQL, Object[].class).setParameter("codigo", udv.getCodigo()).setParameter("inicio", inicio).setParameter("fin", fin).getResultList();
+
+            String hQL = "select distinct p from Pedido p left join fetch p.listaItems where p.unidadDeVenta.codigo = :codigo and p.fechaTransaccion between :inicio and :fin";
+            pedidos = session.createQuery(hQL, Pedido.class).setParameter("codigo", udv.getCodigo()).setParameter("inicio", inicio).setParameter("fin", fin).getResultList();
         } finally {
             session.close();
         }
 
         return pedidos;
-
     }
 
-    public List<Object[]> rankingPedidosMasCarosDeUnFestival(Festival festival){
-        List<Object[]> pedidos = null;
+    public List<Pedido> rankingPedidosMasCarosDeUnFestival(Festival festival){
+        List<Pedido> pedidos = null;
         try {
             iniciaOperacion();
-            String hQL = "select p, sum(ip.precio * ip.cantidad) from Pedido p inner join p.listaItems ip where p.festival = :festival group by p order by sum(ip.precio * ip.cantidad) desc";
-            pedidos = session.createQuery(hQL, Object[].class).setParameter("festival", festival).setMaxResults(3).getResultList();
+            String hQL = "select p from Pedido p inner join p.listaItems ip where p.festival = :festival group by p order by SUM(ip.precio * ip.cantidad) desc";
+            pedidos = session.createQuery(hQL, Pedido.class).setParameter("festival", festival).setMaxResults(3).getResultList();
+
+            // inicializo mientras la sesion sigue abierta
+            for (Pedido p : pedidos) {
+                Hibernate.initialize(p.getListaItems());
+                for (ItemPedido ip : p.getListaItems()) {
+                    Hibernate.initialize(ip.getPlato());
+                }
+            }
 
         } finally {
             session.close();
         }
-
         return pedidos;
     }
 
