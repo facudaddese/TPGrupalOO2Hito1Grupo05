@@ -73,12 +73,12 @@ public class Pedido {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Pedido pedido = (Pedido) o;
-        return getIdPedido() == pedido.getIdPedido() && Objects.equals(getFechaTransaccion(), pedido.getFechaTransaccion()) && Objects.equals(getUnidadDeVenta(), pedido.getUnidadDeVenta()) && Objects.equals(getListaItems(), pedido.getListaItems()) && Objects.equals(getFestival(), pedido.getFestival());
+        return getIdPedido() == pedido.getIdPedido() && Objects.equals(getFechaTransaccion(), pedido.getFechaTransaccion());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getIdPedido(), getFechaTransaccion(), getUnidadDeVenta(), getListaItems(), getFestival());
+        return Objects.hash(getIdPedido(), getFechaTransaccion());
     }
 
     public long getTotal() {

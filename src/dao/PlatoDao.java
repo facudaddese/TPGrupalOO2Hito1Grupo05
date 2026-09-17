@@ -121,7 +121,7 @@ public class PlatoDao {
         try {
             iniciaOperacion();
             String hql = "select p, sum(i.cantidad) from Plato p inner join p.listaItems i where p.unidadDeVenta=:udv group by p order by sum(i.cantidad) desc";
-            platos = session.createQuery(hql, Object[].class).setParameter("udv", udv).getResultList();
+            platos = session.createQuery(hql, Object[].class).setParameter("udv", udv).setMaxResults(3).getResultList();
         } finally {
             session.close();
         }
