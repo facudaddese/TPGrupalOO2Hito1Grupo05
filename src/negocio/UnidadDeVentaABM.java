@@ -139,4 +139,11 @@ public class UnidadDeVentaABM {
         return dao.traerPorRangoFechasFestival(desde, hasta);
     }
 
+    public List<Object[]> traerUnidadesConVentasSuperioresA(double montoObjetivo)throws Exception{
+        if(montoObjetivo < 0){
+            throw new Exception("ERROR: El monto objetivo no puede ser menor que cero");
+        }
+        return dao.traerUnidadesConVentasSuperioresA(montoObjetivo);
+    }
+
 }

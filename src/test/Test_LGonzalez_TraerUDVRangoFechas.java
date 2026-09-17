@@ -6,7 +6,7 @@ import negocio.UnidadDeVentaABM;
 import java.time.LocalDate;
 import java.util.List;
 
-public class TestTraerUDVRangoFechas {
+public class Test_LGonzalez_TraerUDVRangoFechas {
     public static void  main(String[] args) throws Exception {
         UnidadDeVentaABM abmUDV = new UnidadDeVentaABM();
 

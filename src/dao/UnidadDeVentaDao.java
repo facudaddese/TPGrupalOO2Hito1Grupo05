@@ -310,5 +310,28 @@ public class UnidadDeVentaDao {
         return lista;
     }
 
+    public List<Object[]> traerUnidadesConVentasSuperioresA(double montoObjetivo){
+        List<Object[]> lista = null;
+
+        try{
+            iniciaOperacion();
+            String hql = "select u, sum(ip.cantidad * pl.precio) "
+                        + "from ItemPedido ip "
+                        + "inner join ip.pedido p "
+                        + "inner join p.unidadDeVenta u "
+                        + "inner join ip.plato pl "
+                        + "group by u "
+                        + "having sum(ip.cantidad * pl.precio) >= :monto "
+                        + "order by sum(ip.cantidad * pl.precio) desc";
+            lista = session.createQuery(hql, Object[].class).setParameter("monto", (long) montoObjetivo).list();
+        }catch(HibernateException he){
+            manejaExcepcion(he);
+        }finally {
+            session.close();
+        }
+        return lista;
+
+    }
+
 
 }
