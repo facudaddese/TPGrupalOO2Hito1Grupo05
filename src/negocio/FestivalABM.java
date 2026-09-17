@@ -70,6 +70,18 @@ public class FestivalABM {
 		}
 		dao.actualizar(f);
 	}
+	
+	public void modificarFestivalPorNombre(String nombreOriginal, String nombreNuevo) throws Exception {
+		Festival existe = dao.traerPorNombre(nombreOriginal);
+		if (existe == null) {
+			throw new Exception("ERROR:  no existe Festival con nombre " + nombreOriginal);
+		}
+		existe.setNombre(nombreNuevo);
+		dao.actualizar(existe);
+	}
+	
+
+	
 
 	public void eliminar(int id) throws Exception {
 		Festival c = dao.traer(id);

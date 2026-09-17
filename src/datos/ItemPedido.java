@@ -65,16 +65,17 @@ public class ItemPedido {
                 '}';
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         ItemPedido that = (ItemPedido) o;
-        return getCantidad() == that.getCantidad() && Objects.equals(getPlato(), that.getPlato()) && Objects.equals(getPedido(), that.getPedido());
+        return getIdItemPedido() == that.getIdItemPedido() && getCantidad() == that.getCantidad() && getPrecio() == that.getPrecio();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getPlato(), getCantidad(), getPedido());
+        return Objects.hash(getIdItemPedido(), getCantidad(), getPrecio());
     }
 
     public long getSubtotal() {
