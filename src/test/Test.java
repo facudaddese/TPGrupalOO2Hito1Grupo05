@@ -160,6 +160,9 @@ public class Test {
         abmPedido.agregar(LocalDate.of(2026, 9, 4), udv, festival_primavera);
         abmPedido.agregar(LocalDate.of(2026, 9, 11), udv2, festival_primavera);
         abmPedido.agregar(LocalDate.of(2026, 9, 10), udv, festival_primavera);
+        abmPedido.agregar(LocalDate.of(2026, 9, 5), udv2, festival_primavera);
+        abmPedido.agregar(LocalDate.of(2026, 9, 7), udv, festival_primavera);
+        abmPedido.agregar(LocalDate.of(2026, 9, 12), udv, festival_primavera);
 
         //Test agregar ItemPedido - Malena Lescano
         abmItemPedido.agregar(abmPlato.traerPlatoYUnidadDeVenta("Milanesa Simple"), 3, abmPedido.traerPedidoYUnidadDeVenta(1));
@@ -167,6 +170,13 @@ public class Test {
         abmItemPedido.agregar(abmPlato.traerPlatoYUnidadDeVenta("Milanesa A Caballo"), 2, abmPedido.traerPedidoYUnidadDeVenta(2));
         abmItemPedido.agregar(abmPlato.traerPlatoYUnidadDeVenta("Milanesa A Caballo"), 1, abmPedido.traerPedidoYUnidadDeVenta(4));
         abmItemPedido.agregar(abmPlato.traerPlatoYUnidadDeVenta("Hamburguesa Doble"), 4, abmPedido.traerPedidoYUnidadDeVenta(3));
+        abmItemPedido.agregar(abmPlato.traerPlatoYUnidadDeVenta("Milanesa Simple"), 3, abmPedido.traerPedidoYUnidadDeVenta(6));
+        abmItemPedido.agregar(abmPlato.traerPlatoYUnidadDeVenta("Sorrentinos"), 1, abmPedido.traerPedidoYUnidadDeVenta(6));
+        abmItemPedido.agregar(abmPlato.traerPlatoYUnidadDeVenta("Milanesa A Caballo"), 2, abmPedido.traerPedidoYUnidadDeVenta(7));
+        abmItemPedido.agregar(abmPlato.traerPlatoYUnidadDeVenta("Milanesa Napolitana"), 2, abmPedido.traerPedidoYUnidadDeVenta(7));
+        abmItemPedido.agregar(abmPlato.traerPlatoYUnidadDeVenta("Pizza Especial"), 2, abmPedido.traerPedidoYUnidadDeVenta(5));
+        abmItemPedido.agregar(abmPlato.traerPlatoYUnidadDeVenta("Empanadas"), 3, abmPedido.traerPedidoYUnidadDeVenta(5));
+
 
         try {
             //Caso de excepcion, este plato no pertenece a udv, pertenece a udv2
